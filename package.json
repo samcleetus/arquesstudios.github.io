@@ -1,0 +1,30 @@
+{
+  "name": "arquesstudios.github.io",
+  "version": "1.0.0",
+  "description": "The official static website for Arques Studios, an indie game studio creating unique and stylish games for mobile and console",
+  "main": "index.js",
+  "scripts": {
+    "predev": "node scripts/sync-static.js",
+    "dev": "vite",
+    "prebuild": "node scripts/sync-static.js",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samcleetus/arquesstudios.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/samcleetus/arquesstudios.github.io/issues"
+  },
+  "homepage": "https://github.com/samcleetus/arquesstudios.github.io#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "vite": "^7.2.2"
+  }
+}

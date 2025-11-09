@@ -1,362 +1,179 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="icon" type="image/png" href="images/ArquesStudios.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Arques Studios is an independent game studio crafting stylish, story-rich experiences." />
+  <link rel="icon" type="image/png" href="/images/ArquesStudios.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/styles/main.css" />
+  <link rel="preload" as="image" href="/images/korrvale.jpg" imagesrcset="/images/korrvale.jpg 1578w" imagesizes="(max-width: 768px) 90vw, 45vw" />
   <title>Arques Studios</title>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-
-  <!-- Images -->
-
-
-  <style>
-    :root {
-      --cream: #f5f3e7;
-      --dark-blue: #0e1621;
-      --teal-blue: #0a3c5a;
-      --accent-yellow: #ffab2b;
-      --accent-teal: #5dd9cc;
-      --dark-teal: #07344f;
-      --light-teal: #62b0cc;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: 'Roboto', sans-serif;
-      background-color: var(--cream);
-      color: #111;
-      scroll-behavior: smooth;
-    }
-
-    h1, h2, h3, h4 {
-      font-family: Georgia, serif;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* NAVBAR */
-    header {
-      background-color: var(--cream);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 30px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      border-bottom: 1px solid #ddd;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-    }
-
-    .logo img {
-      height: 40px;
-      margin-right: 10px;
-    }
-
-    nav a {
-      margin-left: 25px;
-      color: var(--dark-blue);
-      font-weight: bold;
-    }
-
-    /* HERO SECTION */
-    .hero {
-      background-color: var(--cream);
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      padding: 80px 10%;
-    }
-
-    .hero-left {
-      flex: 1 1 400px;
-    }
-
-    .hero-left h1 {
-      font-size: 51px;
-      margin-bottom: 20px;
-    }
-
-    .hero-button {
-      display: inline-block;
-      padding: 16px 32px;
-      border: 2px solid #111;
-      background-color: white;
-      border-radius: 30px;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
-    }
-
-    .hero-button:hover {
-      background-color: var(--accent-yellow);
-      color: #000;
-    }
-
-    .hero-right {
-      flex: 1 1 400px;
-      text-align: center;
-    }
-
-    .hero-right img {
-      width: 120%;
-      max-width: 600px;
-      border-radius: 20px;
-    }
-
-    /* ABOUT SECTION */
-    .about {
-      background-color: var(--dark-blue);
-      color: white;
-      display: flex;
-      flex-wrap: wrap;
-      padding: 80px 10%;
-      align-items: center;
-    }
-
-    .about-text {
-      flex: 1 1 400px;
-    }
-
-    .about-text h2 {
-      font-size: 45px;
-      margin-bottom: 15px;
-    }
-
-    .about-text p {
-      margin-bottom: 15px;
-      line-height: 1.6;
-    }
-
-    .about-button {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 16px 32px;
-      border: 2px solid white;
-      border-radius: 30px;
-      background: none;
-      color: white;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
-    }
-
-    .about-button:hover {
-      background-color: var(--accent-yellow);
-      color: #000;
-    }
-
-    .about-img {
-      flex: 1 1 300px;
-      text-align: center;
-      margin-top: 30px;
-    }
-
-    .about-img img {
-      max-width: 90%;
-      border-radius: 10px;
-    }
-
-    /* GAMES SECTION */
-    .games {
-      background-color: var(--cream);
-      color: var(--dark-blue);
-      padding: 80px 10%;
-    }
-
-
-    .games h2 {
-      font-size: 45px;
-      margin-bottom: 50px;
-    }
-
-    .games h1 {
-      font-size: 30px;
-      margin-bottom: 20px;
-    }
-
-    .games p {
-      line-height: 1.6;
-      max-width: 100%;
-      margin-bottom: 30px;
-    }
-
-    .game-images {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      justify-items: center;
-    }
-
-    .game-images img {
-      width: 100%;
-      max-width: 350px;
-      border-radius: 10px;
-      object-fit: cover;
-    }
-
-    .game-card {
-      background: var(--cream);
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 4px 6px var(--dark-blue);
-      margin-bottom: 60px;
-    }
-
-    /* CONTACT SECTION */
-    .contact {
-      background-color: var(--dark-blue);
-      padding: 60px 10%;
-    }
-
-    .contact h2 {
-      font-size: 40px;
-      color: var(--cream);
-    }
-
-    .contact p {
-      margin: 8px 0;
-      color: var(--cream)
-    }
-
-    footer {
-      text-align: center;
-      background-color: var(--cream);
-      padding: 30px 20px;
-      color: var(--dark-teal);
-      border-top: 1px solid #ddd;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .hero,
-      .about {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .about-img img,
-      .hero-right img {
-        max-width: 100%;
-      }
-
-      .game-images {
-        flex-direction: column;
-      }
-
-      nav {
-        margin-top: 10px;
-      }
-
-      nav a {
-        display: inline-block;
-        margin: 5px 10px;
-      }
-    }
-  </style>
 </head>
-
 <body>
-
-  <!-- Nav -->
-  <header>
-    <div class="logo">
-      <img src="images/ArquesStudios.png" alt="Arques Studios Logo">
-      <h1>Arques Studios</h1>
+  <header class="site-header" data-defense="outer">
+    <div class="logo" aria-label="Arques Studios">
+      <img src="/images/ArquesStudios.png" width="96" height="96" alt="Arques Studios Logo" decoding="async" loading="lazy" />
+      <div class="logo-text">
+        <h1>Arques Studios</h1>
+      </div>
     </div>
-    <nav>
+    <nav class="primary-nav" data-nav role="navigation" aria-label="Primary">
       <a href="#home">Home</a>
       <a href="#about">About</a>
       <a href="#games">Games</a>
       <a href="#contact">Contact</a>
-      <a href="privacy.html">Privacy Policy</a>
+      <span class="nav-indicator" aria-hidden="true"></span>
+      <a class="nav-secondary" href="privacy.html" rel="noopener">Privacy</a>
     </nav>
   </header>
 
-  <!-- Hero -->
-  <section id="home" class="hero">
-    <div class="hero-left">
-      <h1>Worlds built to last.</h1>
+  <main id="home" class="hero" aria-labelledby="hero-heading">
+    <div class="hero__background" aria-hidden="true">
+      <div class="floating-orb orb-1"></div>
+      <div class="floating-orb orb-2"></div>
+      <div class="battlement-silhouette"></div>
+    </div>
+    <div class="hero-left" data-animate>
+      <h2 id="hero-heading">Worlds built to last.</h2>
       <p>One developer. Multiple worlds. Infinite stories.</p>
-      <a href="#games" class="hero-button">Start Playing</a>
+      <a href="#games" class="button button--primary">Start Playing</a>
     </div>
-    <div class="hero-right">
-      <img src="images/korrvale.jpg" alt="Hero image of players in game studio">
+    <div class="hero-right" data-animate>
+      <img
+        src="/images/korrvale.jpg"
+        width="1578"
+        height="1099"
+        alt="Concept art from an Arques Studios world"
+        decoding="async"
+        fetchpriority="high"
+      />
     </div>
-  </section>
+  </main>
 
-  <!-- About -->
-  <section id="about" class="about">
-    <div class="about-text">
+  <div class="castle-divider" aria-hidden="true"></div>
+
+  <section id="about" class="about" aria-label="About Arques Studios" data-defense="inner">
+    <div class="floating-orb orb-3" aria-hidden="true"></div>
+    <div class="about-text" data-animate>
       <h2>About Us</h2>
       <p>As a solo game developer, I founded Arques Studios — a passion project game development company — as a means through which to tell stories through gameplay. Every detail, from concept and code to design and marketing, is crafted with care to bring unique ideas to life.</p>
       <p>I created Arques Studios as a space to explore creativity and deliver games that are immersive, stylish, and fun. Whether it's through imaginative worlds or charming characters, my goal is to create experiences that stay with players long after they've finished playing.</p>
       <p>Ascata is just the beginning. I'm excited to keep building — one game at a time.</p>
-      <a href="#contact" class="about-button">Contact Us</a>
+      <a href="#contact" class="button button--ghost">Contact Us</a>
     </div>
-    <div class="about-img">
-      <img src="images/about.jpeg" alt="About us image">
+    <div class="about-img" data-animate>
+      <img
+        class="fortress-frame"
+        data-lazy
+        data-src="/images/about2.jpg"
+        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='3'%3E%3Crect width='2' height='3' fill='%230e1621'/%3E%3C/svg%3E"
+        width="1178"
+        height="1972"
+        alt="Developer workspace with concept art sketches"
+        decoding="async"
+      />
+      <noscript>
+        <img src="/images/about2.jpg" width="1178" height="1972" alt="Developer workspace with concept art sketches" loading="lazy" decoding="async" />
+      </noscript>
     </div>
   </section>
 
-  <!-- Games -->
-  <section id="games" class="games">
-    <h2>Games</h2>
+  <div class="castle-divider" aria-hidden="true"></div>
 
-    <div class="game-card">
-      <h1>Ascata</h1>
-      <p>
-      <strong>Ascata</strong> is Arques Studios' debut mobile release -- an endless vertical platformer. With multiple immersive settings and a wide range of unlockable character skins, you’ll jump your way through a variety of visual worlds — from gear-filled factories to vibrant cityscapes and mysterious forests. Whether you're playing as an orange tabby or another stylish character, every run offers a fresh and exciting experience.
-      </p>
+  <section id="games" class="games" aria-label="Arques Studios Games" data-defense="keep">
+    <div class="section-heading" data-animate>
+      <h2>Games</h2>
+      <p class="section-intro">Explore the evolving library of Arques Studios. Each project blends narrative, atmosphere, and mechanics to create memorable journeys.</p>
+    </div>
+
+    <article class="game-card" data-animate>
+      <header>
+        <h3>Ascata</h3>
+      </header>
+      <p><strong>Ascata</strong> is Arques Studios' debut mobile release -- an endless vertical platformer. With multiple immersive settings and a wide range of unlockable character skins, you'll jump your way through a variety of visual worlds — from gear-filled factories to vibrant cityscapes and mysterious forests. Whether you're playing as an orange tabby or another stylish character, every run offers a fresh and exciting experience.</p>
       <p>Download and play for free on the App Store!</p>
+      <div class="game-images ascata-gallery">
+        <figure>
+          <img
+            class="fortress-frame"
+            data-lazy
+            data-src="/images/game1.jpeg"
+            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='3' height='5'%3E%3Crect width='3' height='5' fill='%230e1621'/%3E%3C/svg%3E"
+            width="1179"
+            height="2556"
+            alt="Screenshot of Ascata"
+            decoding="async"
+          />
+          <noscript>
+            <img src="/images/game1.jpeg" width="1179" height="2556" alt="Screenshot of Ascata" loading="lazy" decoding="async" />
+          </noscript>
+        </figure>
+        <figure>
+          <img
+            class="fortress-frame"
+            data-lazy
+            data-src="/images/game2.jpeg"
+            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='3' height='5'%3E%3Crect width='3' height='5' fill='%230a3c5a'/%3E%3C/svg%3E"
+            width="1179"
+            height="2556"
+            alt="Another screenshot of Ascata"
+            decoding="async"
+          />
+          <noscript>
+            <img src="/images/game2.jpeg" width="1179" height="2556" alt="Another screenshot of Ascata" loading="lazy" decoding="async" />
+          </noscript>
+        </figure>
+      </div>
+    </article>
 
-
-    <div class="game-images">
-      <img src="images/game1.jpeg" alt="Screenshot of Ascata">
-      <img src="images/game2.jpeg" alt="Another screenshot of Ascata">
-    </div>
-    </div>
-
-
-    <div class="game-card">
-    <h1>King's Crest</h1>
-    <p>
-    <strong>King's Crest</strong> is Arques Studios' next major project — a story-driven first-person exploration game about solitude, perseverance, and truth. As a traveler climbing a mountain cloaked in secrecy, players uncover why the monarchs isolated themselves, and in the process, must confront the emotional and moral weight of their own journey. Each step higher up the mountain challenges not only the player’s survival but their perception of purpose itself. 
-    Built with cutting-edge integration of large language models (LLMs), King’s Crest encourages players to decipher clues and grant meanings by their own design. The choices you make and how you interpret what they find shape how the story ends. King’s Crest represents our vision for the future of interactive storytelling, where human design and AI technology can be combined to create unforgettable experiences.
-
-    </p>
-
-    <div class="game-images">
-      <img src="images/kingsCrest.jpg" alt="Concept of King's Crest">
-    </div>
-    </div>
-
+    <article class="game-card" data-animate>
+      <header>
+        <h3>King's Crest</h3>
+      </header>
+      <p><strong>King's Crest</strong> is Arques Studios' next major project — a story-driven first-person exploration game about solitude, perseverance, and truth. As a traveler climbing a mountain cloaked in secrecy, players uncover why the monarchs isolated themselves, and in the process, must confront the emotional and moral weight of their own journey.</p>
+      <p>Built with cutting-edge integration of large language models (LLMs), King's Crest encourages players to decipher clues and grant meanings by their own design. The choices you make and how you interpret what they find shape how the story ends. King's Crest represents our vision for the future of interactive storytelling, where human design and AI technology can be combined to create unforgettable experiences.</p>
+      <div class="game-images single">
+        <figure>
+          <img
+            class="fortress-frame"
+            data-lazy
+            data-src="/images/kingsCrest.jpg"
+            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='9'%3E%3Crect width='16' height='9' fill='%235dd9cc'/%3E%3C/svg%3E"
+            width="1612"
+            height="1135"
+            alt="Concept art of King's Crest"
+            decoding="async"
+          />
+          <noscript>
+            <img src="/images/kingsCrest.jpg" width="1612" height="1135" alt="Concept art of King's Crest" loading="lazy" decoding="async" />
+          </noscript>
+        </figure>
+      </div>
+    </article>
   </section>
 
-  <!-- Contact -->
-  <section id="contact" class="contact">
-    <h2>Contact Us</h2>
-    <p>Email: <a href="mailto:arquesstudios@gmail.com">arquesstudios@gmail.com</a></p>
-    <p>Instagram: <a href="https://www.instagram.com/arquesstudios" target="_blank">@arquesstudios</a></p>
+  <div class="castle-divider" aria-hidden="true"></div>
+
+  <section id="contact" class="contact" aria-label="Contact Arques Studios">
+    <div class="contact-card" data-animate>
+      <h2>Contact Us</h2>
+      <p>Email: <a href="mailto:arquesstudios@gmail.com">arquesstudios@gmail.com</a></p>
+      <p>Instagram: <a href="https://www.instagram.com/arquesstudios" target="_blank" rel="noopener">@arquesstudios</a></p>
+    </div>
   </section>
 
-  <!-- Footer -->
-  <footer>
-    &copy; 2025 Arques Studios. All rights reserved.
+  <footer class="site-footer">
+    <p>&copy; 2025 Arques Studios. All rights reserved.</p>
   </footer>
 
+  <script type="module" src="/src/main.js"></script>
+  <noscript>
+    <style>
+      [data-animate] { opacity: 1 !important; transform: none !important; }
+    </style>
+  </noscript>
 </body>
 </html>
