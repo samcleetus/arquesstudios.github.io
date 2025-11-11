@@ -1,4 +1,4 @@
-const NAV_THRESHOLD = 0.55;
+const NAV_THRESHOLD = 0.3;
 
 export function initNavIndicator() {
   const nav = document.querySelector('[data-nav]');
