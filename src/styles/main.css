@@ -159,11 +159,12 @@
   }
 
   .button--primary {
-    background: linear-gradient(135deg, var(--accent-amber), var(--accent-yellow));
+    background: rgb(251, 198, 92);
     color: var(--dark-blue);
   }
 
   .button--primary:hover {
+    background: rgb(245, 190, 80);
     transform: translateY(-2px) scale(1.01);
   }
 
@@ -174,7 +175,7 @@
   }
 
   .button--ghost:hover {
-    background: linear-gradient(135deg, var(--accent-amber), var(--accent-yellow));
+    background: rgb(251, 198, 92);
     color: var(--dark-blue);
     border-color: transparent;
   }
@@ -454,7 +455,7 @@
   }
 
   .contact-card a {
-    color: var(--accent-yellow);
+    color: rgb(251, 198, 92);
     font-weight: 600;
   }
 
