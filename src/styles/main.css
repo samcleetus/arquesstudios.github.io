@@ -431,6 +431,13 @@
     transform: translateZ(0);
   }
 
+  .games-carousel-track.is-snapping .game-card,
+  .games-carousel-track.is-snapping .game-card::after,
+  .games-carousel-track.is-snapping .game-card h3,
+  .games-carousel-track.is-snapping .game-card p {
+    transition: none !important;
+  }
+
   .carousel-control {
     position: absolute;
     top: 50%;

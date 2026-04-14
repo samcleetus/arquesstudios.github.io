@@ -321,14 +321,14 @@ function GamesCarousel() {
 
   const onCardClick = useCallback(
     (sourceIndex, slideIndex) => {
-      if (isAnimating || slideIndex === activeSlide) return;
+      if (isAnimating || sourceIndex === activeRealIndex) return;
       if (sourceIndex === previousRealIndex) {
         moveBy(-1);
       } else if (sourceIndex === nextRealIndex) {
         moveBy(1);
       }
     },
-    [activeSlide, isAnimating, moveBy, nextRealIndex, previousRealIndex]
+    [activeRealIndex, isAnimating, moveBy, nextRealIndex, previousRealIndex]
   );
 
   const onKeyDown = useCallback(
@@ -402,7 +402,7 @@ function GamesCarousel() {
         >
           <div
             ref={trackRef}
-            className="games-carousel-track"
+            className={`games-carousel-track${isSnapping ? ' is-snapping' : ''}`}
             style={trackStyle}
             onTransitionEnd={onTrackTransitionEnd}
           >
@@ -410,7 +410,7 @@ function GamesCarousel() {
               <GameCard
                 key={`${slide.cloneKey}-${slideIndex}`}
                 game={slide}
-                isCenter={slideIndex === activeSlide}
+                isCenter={slide.sourceIndex === activeRealIndex}
                 isClone={slide.isClone}
                 onClick={() => onCardClick(slide.sourceIndex, slideIndex)}
               />
