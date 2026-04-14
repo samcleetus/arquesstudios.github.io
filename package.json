@@ -23,8 +23,13 @@
   },
   "homepage": "https://github.com/samcleetus/arquesstudios.github.io#readme",
   "devDependencies": {
+    "@vitejs/plugin-react": "^5.2.0",
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.6",
     "vite": "^7.2.2"
+  },
+  "dependencies": {
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5"
   }
 }
