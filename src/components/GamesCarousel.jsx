@@ -18,6 +18,31 @@ const PLACEHOLDERS = {
 
 const GAMES = [
   {
+    id: 'cent-isle',
+    title: 'Cent Isle',
+    comingSoon: true,
+    platform: 'Mobile',
+    genre: 'Educational',
+    paragraphs: [
+      <>
+        <strong>Cent Isle</strong> is an upcoming financial literacy game set on a tropical island
+        economy. Players manage resources, trade goods, and make investment decisions as they grow
+        their island from a small fishing village into a thriving financial hub.
+      </>,
+      'Learn real-world money concepts through engaging gameplay - budgeting, saving, investing, and more.',
+    ],
+    imageLayoutClass: 'single',
+    images: [
+      {
+        src: '/images/centIsle_placeholder.jpg',
+        placeholder: PLACEHOLDERS.wideTeal,
+        width: 1600,
+        height: 900,
+        alt: 'Placeholder concept art for Cent Isle',
+      },
+    ],
+  },
+  {
     id: 'ascata',
     title: 'Ascata',
     platform: 'iOS',
@@ -77,31 +102,6 @@ const GAMES = [
         width: 2001,
         height: 1927,
         alt: 'Concept art of a procedurally generated Crownlands realm',
-      },
-    ],
-  },
-  {
-    id: 'cent-isle',
-    title: 'Cent Isle',
-    comingSoon: true,
-    platform: 'Mobile',
-    genre: 'Educational',
-    paragraphs: [
-      <>
-        <strong>Cent Isle</strong> is an upcoming financial literacy game set on a tropical island
-        economy. Players manage resources, trade goods, and make investment decisions as they grow
-        their island from a small fishing village into a thriving financial hub.
-      </>,
-      'Learn real-world money concepts through engaging gameplay - budgeting, saving, investing, and more.',
-    ],
-    imageLayoutClass: 'single',
-    images: [
-      {
-        src: '/images/centIsle_placeholder.jpg',
-        placeholder: PLACEHOLDERS.wideTeal,
-        width: 1600,
-        height: 900,
-        alt: 'Placeholder concept art for Cent Isle',
       },
     ],
   },

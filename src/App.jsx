@@ -267,7 +267,7 @@ function App() {
             </a>
           </div>
         </div>
-        <p className="footer-copy">&copy; 2025 Arques Studios. All rights reserved.</p>
+        <p className="footer-copy">&copy; 2026 Arques Studios. All rights reserved.</p>
       </footer>
 
       <button type="button" className="scroll-top" id="scroll-top" aria-label="Scroll to top">
