@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import { initNavIndicator } from './modules/navIndicator.js';
 import { initScrollReveal } from './modules/scrollReveal.js';
 import { initLazyMedia } from './modules/lazyMedia.js';
-import { initGamesCarousel } from './modules/gamesCarousel.js';
 import { initParallax } from './modules/parallax.js';
 import { initMobileNav } from './modules/mobileNav.js';
+import GamesCarousel from './components/GamesCarousel.jsx';
 
 const BOOTSTRAP_DATASET_KEY = 'arquesReactBootstrapped';
 
@@ -43,7 +43,6 @@ function App() {
 
     initNavIndicator();
     initScrollReveal();
-    initGamesCarousel();
     initLazyMedia();
     initParallax();
     initMobileNav();
@@ -105,196 +104,7 @@ function App() {
 
       <div className="castle-divider" aria-hidden="true" />
 
-      <section id="games" className="games" aria-label="Arques Studios Games" data-defense="keep">
-        <div className="section-heading" data-animate="">
-          <h2>Games</h2>
-          <p className="section-intro">
-            Explore the growing library of Arques Studios. Each project blends narrative,
-            atmosphere, and mechanics to create memorable journeys.
-          </p>
-        </div>
-
-        <div className="games-carousel-shell">
-          <button
-            type="button"
-            className="carousel-control carousel-control--prev"
-            data-carousel-prev=""
-            aria-label="View previous game"
-          >
-            <span aria-hidden="true">&#8249;</span>
-          </button>
-
-          <div
-            className="games-carousel"
-            data-games-carousel=""
-            tabIndex="0"
-            aria-label="Arques Studios games carousel"
-          >
-            <article className="game-card" data-carousel-card="">
-              <header>
-                <h3>Ascata</h3>
-              </header>
-              <div className="game-meta">
-                <span className="badge badge--platform">iOS</span>
-                <span className="badge badge--genre">Platformer</span>
-              </div>
-              <p>
-                <strong>Ascata</strong> is Arques Studios&apos; debut mobile release - an endless vertical
-                platformer with multiple immersive settings and a wide range of unlockable character skins.
-                Jump through gear-filled factories, vibrant cityscapes, and mysterious forests. Every run
-                offers a fresh and exciting experience.
-              </p>
-              <p>Download and play for free on the App Store!</p>
-              <div className="game-images ascata-gallery">
-                <figure>
-                  <img
-                    className="fortress-frame"
-                    data-lazy=""
-                    data-src="/images/game1.jpeg"
-                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='3' height='5'%3E%3Crect width='3' height='5' fill='%230e1621'/%3E%3C/svg%3E"
-                    width="1179"
-                    height="2556"
-                    alt="Screenshot of Ascata"
-                    decoding="async"
-                  />
-                </figure>
-                <figure>
-                  <img
-                    className="fortress-frame"
-                    data-lazy=""
-                    data-src="/images/game2.jpeg"
-                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='3' height='5'%3E%3Crect width='3' height='5' fill='%230a3c5a'/%3E%3C/svg%3E"
-                    width="1179"
-                    height="2556"
-                    alt="Another screenshot of Ascata"
-                    decoding="async"
-                  />
-                </figure>
-              </div>
-            </article>
-
-            <article className="game-card" data-carousel-card="">
-              <header>
-                <h3>Crownlands</h3>
-              </header>
-              <div className="game-meta">
-                <span className="badge badge--platform">Web</span>
-                <span className="badge badge--genre">World-Builder</span>
-              </div>
-              <p>
-                <strong>Crownlands</strong> is an experimental world-building assistant for players and
-                dungeon masters who want to bring their fantasy kingdoms to life. By adjusting parameters
-                like geography, climate, and regional tension, Crownlands procedurally assembles a custom
-                map shaped directly by those choices.
-              </p>
-              <p>
-                Check out{' '}
-                <a href="https://crownlands.vercel.app/" target="_blank" rel="noopener">
-                  <strong>Crownlands</strong>
-                </a>{' '}
-                and build a world of your own!
-              </p>
-              <div className="game-images single">
-                <figure>
-                  <img
-                    className="fortress-frame"
-                    data-lazy=""
-                    data-src="/images/crownlands_img.jpg"
-                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='19'%3E%3Crect width='20' height='19' fill='%230e1621'/%3E%3C/svg%3E"
-                    width="2001"
-                    height="1927"
-                    alt="Concept art of a procedurally generated Crownlands realm"
-                    decoding="async"
-                  />
-                </figure>
-              </div>
-            </article>
-
-            <article className="game-card" data-carousel-card="">
-              <header>
-                <div className="game-card-title-row">
-                  <h3>Cent Isle</h3>
-                  <span className="badge badge--coming-soon">Coming Soon</span>
-                </div>
-              </header>
-              <div className="game-meta">
-                <span className="badge badge--platform">Mobile</span>
-                <span className="badge badge--genre">Educational</span>
-              </div>
-              <p>
-                <strong>Cent Isle</strong> is an upcoming financial literacy game set on a tropical island
-                economy. Players manage resources, trade goods, and make investment decisions as they grow
-                their island from a small fishing village into a thriving financial hub.
-              </p>
-              <p>
-                Learn real-world money concepts through engaging gameplay - budgeting, saving, investing,
-                and more.
-              </p>
-              <div className="game-images single">
-                <figure>
-                  <img
-                    className="fortress-frame"
-                    data-lazy=""
-                    data-src="/images/centIsle_placeholder.jpg"
-                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='9'%3E%3Crect width='16' height='9' fill='%2300897b'/%3E%3C/svg%3E"
-                    width="1600"
-                    height="900"
-                    alt="Placeholder concept art for Cent Isle"
-                    decoding="async"
-                  />
-                </figure>
-              </div>
-            </article>
-
-            <article className="game-card" data-carousel-card="">
-              <header>
-                <div className="game-card-title-row">
-                  <h3>King&apos;s Crest</h3>
-                  <span className="badge badge--coming-soon">Coming Soon</span>
-                </div>
-              </header>
-              <div className="game-meta">
-                <span className="badge badge--platform">PC</span>
-                <span className="badge badge--genre">Narrative</span>
-              </div>
-              <p>
-                <strong>King&apos;s Crest</strong> is Arques Studios&apos; next major project - a story-driven
-                first-person exploration game about solitude, perseverance, and truth. As a traveler
-                climbing a mountain cloaked in secrecy, players uncover why the monarchs isolated
-                themselves, and must confront the emotional and moral weight of their own journey.
-              </p>
-              <p>
-                Built with cutting-edge integration of large language models, King&apos;s Crest encourages
-                players to decipher clues and grant meanings by their own design. The choices you make
-                shape how the story ends.
-              </p>
-              <div className="game-images single">
-                <figure>
-                  <img
-                    className="fortress-frame"
-                    data-lazy=""
-                    data-src="/images/kingsCrest.jpg"
-                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='9'%3E%3Crect width='16' height='9' fill='%235dd9cc'/%3E%3C/svg%3E"
-                    width="1612"
-                    height="1135"
-                    alt="Concept art of King&apos;s Crest"
-                    decoding="async"
-                  />
-                </figure>
-              </div>
-            </article>
-          </div>
-
-          <button
-            type="button"
-            className="carousel-control carousel-control--next"
-            data-carousel-next=""
-            aria-label="View next game"
-          >
-            <span aria-hidden="true">&#8250;</span>
-          </button>
-        </div>
-      </section>
+      <GamesCarousel />
 
       <div className="castle-divider" aria-hidden="true" />
 

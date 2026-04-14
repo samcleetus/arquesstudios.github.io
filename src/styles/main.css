@@ -408,10 +408,10 @@
   }
 
   .games-carousel {
-    --games-card-width: min(82vw, 860px);
+    --games-card-width: clamp(320px, 70vw, 860px);
     position: relative;
     overflow: hidden;
-    padding-inline: max(1rem, calc((100% - var(--games-card-width)) / 2));
+    padding-inline: 0;
     padding-bottom: 0.75rem;
     touch-action: pan-y;
   }
@@ -938,7 +938,7 @@
   }
 
   .games-carousel {
-    --games-card-width: min(92vw, 700px);
+    --games-card-width: min(92vw, 720px);
   }
 
   .carousel-control {
