@@ -19,6 +19,8 @@ function getSlideTarget(viewport, slide) {
 export function initGamesCarousel() {
   const viewport = document.querySelector('[data-games-carousel]');
   if (!viewport) return;
+  if (viewport.dataset.carouselInitialized === 'true') return;
+  viewport.dataset.carouselInitialized = 'true';
 
   const realCards = Array.from(viewport.querySelectorAll('[data-carousel-card]'));
   if (realCards.length === 0) return;
@@ -48,9 +50,11 @@ export function initGamesCarousel() {
   let slideTargets = [];
   let isAnimating = false;
   let queuedDelta = 0;
+  let resizeRafId = 0;
 
   const setTransform = (index, animate) => {
     const target = slideTargets[index];
+    if (typeof target !== 'number') return;
     track.style.transition = animate && !prefersReducedMotion
       ? `transform ${TRANSITION_MS}ms cubic-bezier(0.22, 1, 0.36, 1)`
       : 'none';
@@ -65,6 +69,15 @@ export function initGamesCarousel() {
 
   const measure = () => {
     slideTargets = slides.map((slide) => getSlideTarget(viewport, slide));
+  };
+
+  const scheduleMeasure = () => {
+    if (resizeRafId) return;
+    resizeRafId = requestAnimationFrame(() => {
+      resizeRafId = 0;
+      measure();
+      setTransform(currentIndex, false);
+    });
   };
 
   const jumpToMatchingRealIfNeeded = () => {
@@ -95,7 +108,6 @@ export function initGamesCarousel() {
       queuedDelta = delta;
       return;
     }
-    measure();
     goTo(currentIndex + delta, true);
     if (prefersReducedMotion) {
       jumpToMatchingRealIfNeeded();
@@ -163,15 +175,11 @@ export function initGamesCarousel() {
     }
   });
 
-  window.addEventListener('resize', () => {
-    measure();
-    setTransform(currentIndex, false);
-  });
+  window.addEventListener('resize', scheduleMeasure, { passive: true });
 
   if (typeof ResizeObserver !== 'undefined') {
     new ResizeObserver(() => {
-      measure();
-      setTransform(currentIndex, false);
+      scheduleMeasure();
     }).observe(viewport);
   }
 

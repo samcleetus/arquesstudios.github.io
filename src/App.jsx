@@ -12,12 +12,28 @@ function initScrollTop() {
   const btn = document.getElementById('scroll-top');
   if (!btn) return;
 
-  const onScroll = () => btn.classList.toggle('visible', window.scrollY > 400);
+  let ticking = false;
+  let isVisible = false;
+
+  const updateVisibility = () => {
+    const nextVisible = window.scrollY > 400;
+    if (nextVisible !== isVisible) {
+      btn.classList.toggle('visible', nextVisible);
+      isVisible = nextVisible;
+    }
+    ticking = false;
+  };
+
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(updateVisibility);
+  };
   const onClick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   window.addEventListener('scroll', onScroll, { passive: true });
   btn.addEventListener('click', onClick);
-  onScroll();
+  updateVisibility();
 }
 
 function App() {

@@ -17,7 +17,10 @@ export function initScrollReveal() {
         obs.unobserve(entry.target);
       });
     },
-    { threshold: 0.2 }
+    {
+      threshold: 0.08,
+      rootMargin: '0px 0px -8% 0px',
+    }
   );
 
   revealElements.forEach((element) => observer.observe(element));

@@ -6,37 +6,66 @@ export function initParallax() {
   // Parallax is disabled on touch/mobile — it's jarring on small screens
   if (!window.matchMedia('(hover: hover) and (min-width: 900px)').matches) return;
 
-  const elements = Array.from(document.querySelectorAll('[data-parallax]'));
-  if (!elements.length) return;
+  const items = Array.from(document.querySelectorAll('[data-parallax]')).map((el) => ({
+    el,
+    rate: parseFloat(el.dataset.parallax) || 0.2,
+    top: 0,
+    height: 0,
+    isVisible: true,
+  }));
+  if (!items.length) return;
 
   let ticking = false;
+  let viewportHeight = window.innerHeight;
 
-  const update = () => {
-    const halfVh = window.innerHeight / 2;
+  const scheduleUpdate = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const viewportCenter = window.scrollY + viewportHeight / 2;
 
-    elements.forEach((el) => {
-      const rate = parseFloat(el.dataset.parallax) || 0.2;
-      const rect = el.getBoundingClientRect();
-      const elCenterY = rect.top + rect.height / 2;
-      // Offset is 0 when element is centred in the viewport; grows as it drifts away
-      const offset = (halfVh - elCenterY) * rate;
-      el.style.transform = `translateY(${offset}px)`;
+      items.forEach((item) => {
+        if (!item.isVisible) return;
+        const elementCenter = item.top + item.height / 2;
+        const offset = (viewportCenter - elementCenter) * item.rate;
+        item.el.style.transform = `translate3d(0, ${offset}px, 0)`;
+      });
+
+      ticking = false;
     });
-
-    ticking = false;
   };
 
-  window.addEventListener(
-    'scroll',
-    () => {
-      if (!ticking) {
-        requestAnimationFrame(update);
-        ticking = true;
-      }
-    },
-    { passive: true }
-  );
+  const measure = () => {
+    viewportHeight = window.innerHeight;
+    items.forEach((item) => {
+      const rect = item.el.getBoundingClientRect();
+      item.top = rect.top + window.scrollY;
+      item.height = rect.height;
+    });
+    scheduleUpdate();
+  };
 
-  // Set initial positions before first scroll
-  requestAnimationFrame(update);
+  if (typeof IntersectionObserver !== 'undefined') {
+    const visibilityObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const matched = items.find((item) => item.el === entry.target);
+        if (!matched) return;
+        matched.isVisible = entry.isIntersecting;
+      });
+      scheduleUpdate();
+    }, {
+      rootMargin: '40% 0px',
+      threshold: 0,
+    });
+
+    items.forEach((item) => {
+      visibilityObserver.observe(item.el);
+    });
+  }
+
+  window.addEventListener('scroll', scheduleUpdate, { passive: true });
+  window.addEventListener('resize', measure, { passive: true });
+  window.addEventListener('load', measure, { passive: true });
+
+  measure();
 }
