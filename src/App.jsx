@@ -87,6 +87,7 @@ function App() {
           <a href="#games">Games</a>
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
+          <a href="publications.html">Publications</a>
           <span className="nav-indicator" aria-hidden="true" />
         </nav>
       </header>
@@ -220,6 +221,7 @@ function App() {
             <a href="#games">Games</a>
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
+            <a href="publications.html">Publications</a>
             <a href="privacy.html" rel="noopener">
               Privacy
             </a>
