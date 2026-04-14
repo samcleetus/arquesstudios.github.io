@@ -408,7 +408,7 @@
   }
 
   .games-carousel {
-    --games-card-width: clamp(320px, 70vw, 860px);
+    --games-card-width: clamp(300px, 62vw, 760px);
     position: relative;
     overflow: hidden;
     padding-inline: 0;
@@ -488,7 +488,7 @@
   .game-card {
     background: rgba(255, 255, 255, 0.9);
     border-radius: 1.75rem;
-    padding: clamp(1.5rem, 4vw, 3rem);
+    padding: clamp(1.2rem, 2.8vw, 2rem);
     box-shadow: 0 14px 30px rgba(14, 22, 33, 0.12);
     border: 1px solid rgba(14, 22, 33, 0.05);
     backdrop-filter: blur(6px);
@@ -500,6 +500,12 @@
     transition: transform 380ms ease, box-shadow 380ms ease, background-color 380ms ease, color 380ms ease, opacity 380ms ease;
     contain: paint;
     will-change: transform, opacity;
+  }
+
+  .game-card p {
+    margin: 0 0 0.75rem;
+    line-height: 1.5;
+    font-size: 0.98rem;
   }
 
   .game-card[data-carousel-clone='true'] {
@@ -620,22 +626,25 @@
     display: flex;
     align-items: center;
     gap: 0.4rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
   }
 
   .game-card header h3 {
-    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
   }
 
   .game-images {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1rem;
-    margin-top: 1.5rem;
+    gap: 0.75rem;
+    margin-top: 1rem;
   }
 
   .game-images.ascata-gallery img {
-    max-width: clamp(160px, 22vw, 240px);
+    max-width: clamp(130px, 16vw, 180px);
+    max-height: clamp(220px, 28vh, 300px);
+    width: auto;
+    object-fit: contain;
     margin-inline: auto;
   }
 
@@ -649,8 +658,11 @@
   }
 
   .game-images.single img {
-    width: 100%;
-    max-width: clamp(320px, 70vw, 720px);
+    width: auto;
+    height: auto;
+    max-width: clamp(280px, 54vw, 560px);
+    max-height: clamp(190px, 28vw, 300px);
+    object-fit: contain;
     margin-inline: auto;
   }
 
@@ -945,7 +957,7 @@
   }
 
   .games-carousel {
-    --games-card-width: min(92vw, 720px);
+    --games-card-width: min(92vw, 620px);
   }
 
   .carousel-control {
