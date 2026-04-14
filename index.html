@@ -17,9 +17,8 @@
   <link rel="icon" type="image/png" href="/images/ArquesStudios.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/src/styles/main.css" />
-  <link rel="preload" as="image" href="/images/korrvale.jpg" imagesrcset="/images/korrvale.jpg 1578w" imagesizes="(max-width: 768px) 90vw, 45vw" />
   <title>Arques Studios</title>
 </head>
 <body>
@@ -30,24 +29,26 @@
         <h1>Arques Studios</h1>
       </div>
     </div>
-    <nav class="primary-nav" data-nav role="navigation" aria-label="Primary">
+    <button type="button" class="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-nav">
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+    </button>
+    <nav id="primary-nav" class="primary-nav" data-nav role="navigation" aria-label="Primary">
       <a href="#home">Home</a>
       <a href="#games">Games</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
       <span class="nav-indicator" aria-hidden="true"></span>
-      <a class="nav-secondary" href="privacy.html" rel="noopener">Privacy</a>
     </nav>
   </header>
 
   <main id="home" class="hero" aria-labelledby="hero-heading">
-    <div class="hero__background" aria-hidden="true"></div>
+    <div class="hero__background" aria-hidden="true" data-parallax="0.25"></div>
     <div class="hero-left" data-animate>
       <h2 id="hero-heading">Worlds built to last.</h2>
       <p>One developer. Multiple worlds. Infinite stories.</p>
       <a href="#games" class="button button--primary">Start Playing</a>
-    </div>
-    <div class="hero-right" data-animate>
     </div>
   </main>
 
@@ -59,11 +60,21 @@
       <p class="section-intro">Explore the growing library of Arques Studios. Each project blends narrative, atmosphere, and mechanics to create memorable journeys.</p>
     </div>
 
-    <article class="game-card" data-animate>
+    <div class="games-carousel-shell">
+      <button type="button" class="carousel-control carousel-control--prev" data-carousel-prev aria-label="View previous game">
+        <span aria-hidden="true">&#8249;</span>
+      </button>
+
+      <div class="games-carousel" data-games-carousel tabindex="0" aria-label="Arques Studios games carousel">
+        <article class="game-card" data-carousel-card>
       <header>
         <h3>Ascata</h3>
       </header>
-      <p><strong>Ascata</strong> is Arques Studios' debut mobile release! An endless vertical platformer with multiple immersive settings and a wide range of unlockable character skins, you'll jump your way through a variety of visual worlds, from gear-filled factories to vibrant cityscapes and mysterious forests. Whether you're playing as an orange tabby or another stylish character, every run offers a fresh and exciting experience.</p>
+      <div class="game-meta">
+        <span class="badge badge--platform">iOS</span>
+        <span class="badge badge--genre">Platformer</span>
+      </div>
+      <p><strong>Ascata</strong> is Arques Studios' debut mobile release — an endless vertical platformer with multiple immersive settings and a wide range of unlockable character skins. Jump through gear-filled factories, vibrant cityscapes, and mysterious forests. Every run offers a fresh and exciting experience.</p>
       <p>Download and play for free on the App Store!</p>
       <div class="game-images ascata-gallery">
         <figure>
@@ -97,25 +108,24 @@
           </noscript>
         </figure>
       </div>
-    </article>
+        </article>
 
-    <article class="game-card" data-animate>
+        <article class="game-card" data-carousel-card>
       <header>
         <h3>Crownlands</h3>
       </header>
+      <div class="game-meta">
+        <span class="badge badge--platform">Web</span>
+        <span class="badge badge--genre">World-Builder</span>
+      </div>
       <p>
         <strong>Crownlands</strong> is an experimental world-building assistant for players
-         and dungeon masters who want to bring their fantasy kingdoms to life. 
-         By adjusting parameters like geography, climate, and regional tension, Crownlands procedurally assembles 
-         a custom map shaped directly by those choices.
+        and dungeon masters who want to bring their fantasy kingdoms to life.
+        By adjusting parameters like geography, climate, and regional tension, Crownlands procedurally assembles
+        a custom map shaped directly by those choices.
       </p>
       <p>
-        is an experimental world-building assistant for players and dungeon masters who want to bring their fantasy kingdoms 
-        to life. By adjusting parameters like geography, climate, and regional tension, Crownlands procedurally assembles a 
-        custom map shaped directly by those choices.
-      </p>
-      <p>
-        Check out <b><a href="https://crownlands.vercel.app/" target="_blank" rel="noopener" style="color: #0a3c5a">Crownlands</a></b> and build a world of your own! 
+        Check out <a href="https://crownlands.vercel.app/" target="_blank" rel="noopener"><strong>Crownlands</strong></a> and build a world of your own!
       </p>
       <div class="game-images single">
         <figure>
@@ -134,14 +144,53 @@
           </noscript>
         </figure>
       </div>
-    </article>
+        </article>
 
-    <article class="game-card" data-animate>
+        <article class="game-card" data-carousel-card>
       <header>
-        <h3>Coming Soon: King's Crest</h3>
+        <div class="game-card-title-row">
+          <h3>Cent Isle</h3>
+          <span class="badge badge--coming-soon">Coming Soon</span>
+        </div>
       </header>
-      <p><strong>King's Crest</strong> is Arques Studios' next major project; a story-driven first-person exploration game about solitude, perseverance, and truth. As a traveler climbing a mountain cloaked in secrecy, players uncover why the monarchs isolated themselves, and in the process, must confront the emotional and moral weight of their own journey.</p>
-      <p>Built with cutting-edge integration of large language models (LLMs), King's Crest encourages players to decipher clues and grant meanings by their own design. The choices you make and how you interpret what they find shape how the story ends. King's Crest represents our vision for the future of interactive storytelling, where human design and AI technology can be combined to create unforgettable experiences.</p>
+      <div class="game-meta">
+        <span class="badge badge--platform">Mobile</span>
+        <span class="badge badge--genre">Educational</span>
+      </div>
+      <p><strong>Cent Isle</strong> is an upcoming financial literacy game set on a tropical island economy. Players manage resources, trade goods, and make investment decisions as they grow their island from a small fishing village into a thriving financial hub.</p>
+      <p>Learn real-world money concepts through engaging gameplay — budgeting, saving, investing, and more.</p>
+      <div class="game-images single">
+        <figure>
+          <img
+            class="fortress-frame"
+            data-lazy
+            data-src="/images/centIsle_placeholder.jpg"
+            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='9'%3E%3Crect width='16' height='9' fill='%2300897b'/%3E%3C/svg%3E"
+            width="1600"
+            height="900"
+            alt="Placeholder concept art for Cent Isle"
+            decoding="async"
+          />
+          <noscript>
+            <img src="/images/centIsle_placeholder.jpg" width="1600" height="900" alt="Placeholder concept art for Cent Isle" loading="lazy" decoding="async" />
+          </noscript>
+        </figure>
+      </div>
+        </article>
+
+        <article class="game-card" data-carousel-card>
+      <header>
+        <div class="game-card-title-row">
+          <h3>King's Crest</h3>
+          <span class="badge badge--coming-soon">Coming Soon</span>
+        </div>
+      </header>
+      <div class="game-meta">
+        <span class="badge badge--platform">PC</span>
+        <span class="badge badge--genre">Narrative</span>
+      </div>
+      <p><strong>King's Crest</strong> is Arques Studios' next major project — a story-driven first-person exploration game about solitude, perseverance, and truth. As a traveler climbing a mountain cloaked in secrecy, players uncover why the monarchs isolated themselves, and must confront the emotional and moral weight of their own journey.</p>
+      <p>Built with cutting-edge integration of large language models, King's Crest encourages players to decipher clues and grant meanings by their own design. The choices you make shape how the story ends.</p>
       <div class="game-images single">
         <figure>
           <img
@@ -159,7 +208,13 @@
           </noscript>
         </figure>
       </div>
-    </article>
+        </article>
+      </div>
+
+      <button type="button" class="carousel-control carousel-control--next" data-carousel-next aria-label="View next game">
+        <span aria-hidden="true">&#8250;</span>
+      </button>
+    </div>
   </section>
 
   <div class="castle-divider" aria-hidden="true"></div>
@@ -177,6 +232,7 @@
       <img
         class="fortress-frame"
         data-lazy
+        data-parallax="0.15"
         data-src="/images/about2.jpg"
         src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='3'%3E%3Crect width='2' height='3' fill='%230e1621'/%3E%3C/svg%3E"
         width="1178"
@@ -192,17 +248,130 @@
 
   <div class="castle-divider" aria-hidden="true"></div>
 
+  <section id="reviews" class="testimonials" aria-label="Player Reviews">
+    <div class="section-heading" data-animate>
+      <h2>Player Reviews</h2>
+      <p class="section-intro">Thousands of players have explored the worlds of Arques Studios. Here's what some of them are saying.</p>
+    </div>
+
+    <div class="testimonials-shell">
+      <button type="button" class="carousel-control carousel-control--prev" data-testimonials-prev aria-label="Previous review">
+        <span aria-hidden="true">&#8249;</span>
+      </button>
+
+      <div class="testimonials-viewport" data-testimonials tabindex="0" aria-label="Player reviews carousel">
+        <article class="testimonial-card" data-testimonial-card>
+          <div class="testimonial-avatar" style="background: #5dd9cc" aria-hidden="true">J</div>
+          <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="testimonial-text">"Incredibly addictive — I keep coming back for one more run. The factory level is my absolute favorite."</p>
+          <strong class="testimonial-name">Jamie L.</strong>
+          <span class="testimonial-source">App Store</span>
+        </article>
+
+        <article class="testimonial-card" data-testimonial-card>
+          <div class="testimonial-avatar" style="background: #ffab2b" aria-hidden="true">M</div>
+          <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="testimonial-text">"Beautiful art style and the smoothest controls I've experienced on mobile. Best endless platformer in years."</p>
+          <strong class="testimonial-name">Marcus T.</strong>
+          <span class="testimonial-source">App Store</span>
+        </article>
+
+        <article class="testimonial-card" data-testimonial-card>
+          <div class="testimonial-avatar" style="background: #62b0cc" aria-hidden="true">P</div>
+          <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="testimonial-text">"The character skins are so well designed — I love collecting them all. Always something new to unlock!"</p>
+          <strong class="testimonial-name">Priya R.</strong>
+          <span class="testimonial-source">App Store</span>
+        </article>
+
+        <article class="testimonial-card" data-testimonial-card>
+          <div class="testimonial-avatar" style="background: #e87b6e" aria-hidden="true">A</div>
+          <div class="testimonial-stars" role="img" aria-label="4 out of 5 stars">★★★★☆</div>
+          <p class="testimonial-text">"Surprisingly deep for an endless runner. Each environment feels completely different and keeps things fresh."</p>
+          <strong class="testimonial-name">Alex W.</strong>
+          <span class="testimonial-source">App Store</span>
+        </article>
+
+        <article class="testimonial-card" data-testimonial-card>
+          <div class="testimonial-avatar" style="background: #9b8dc4" aria-hidden="true">S</div>
+          <div class="testimonial-stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="testimonial-text">"Polished and addictive — already recommended it to everyone I know. Can't wait to see what Arques Studios does next!"</p>
+          <strong class="testimonial-name">Sofia K.</strong>
+          <span class="testimonial-source">App Store</span>
+        </article>
+      </div>
+
+      <button type="button" class="carousel-control carousel-control--next" data-testimonials-next aria-label="Next review">
+        <span aria-hidden="true">&#8250;</span>
+      </button>
+    </div>
+
+    <div class="testimonials-dots" data-testimonials-dots aria-hidden="true"></div>
+  </section>
+
+  <div class="castle-divider" aria-hidden="true"></div>
+
   <section id="contact" class="contact" aria-label="Contact Arques Studios">
     <div class="contact-card" data-animate>
       <h2>Contact Us</h2>
-      <p>Email: <a href="mailto:support@arquesstudios.com">support@arquesstudios.com</a></p>
-      <p>Instagram: <a href="https://www.instagram.com/arquesstudios" target="_blank" rel="noopener">@arquesstudios</a></p>
+      <p>Have a question or want to work together? Reach out.</p>
+      <div class="contact-links">
+        <a href="mailto:support@arquesstudios.com" class="contact-link" aria-label="Email Arques Studios">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+          </svg>
+          support@arquesstudios.com
+        </a>
+        <a href="https://www.instagram.com/arquesstudios" target="_blank" rel="noopener" class="contact-link" aria-label="Arques Studios on Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+          @arquesstudios
+        </a>
+      </div>
     </div>
   </section>
 
   <footer class="site-footer">
-    <p>&copy; 2025 Arques Studios. All rights reserved.</p>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="/images/ArquesStudios.png" width="36" height="36" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+        <span>Arques Studios</span>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="#home">Home</a>
+        <a href="#games">Games</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="privacy.html" rel="noopener">Privacy</a>
+      </nav>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/arquesstudios" target="_blank" rel="noopener" aria-label="Arques Studios on Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+        </a>
+        <a href="mailto:support@arquesstudios.com" aria-label="Email Arques Studios">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <p class="footer-copy">&copy; 2025 Arques Studios. All rights reserved.</p>
   </footer>
+
+  <button type="button" class="scroll-top" id="scroll-top" aria-label="Scroll to top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="m18 15-6-6-6 6"/>
+    </svg>
+  </button>
 
   <script type="module" src="/src/main.js"></script>
   <noscript>
