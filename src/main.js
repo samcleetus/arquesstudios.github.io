@@ -2,7 +2,6 @@ import { initNavIndicator } from './modules/navIndicator.js';
 import { initScrollReveal } from './modules/scrollReveal.js';
 import { initLazyMedia } from './modules/lazyMedia.js';
 import { initGamesCarousel } from './modules/gamesCarousel.js';
-import { initTestimonialsCarousel } from './modules/testimonialsCarousel.js';
 import { initParallax } from './modules/parallax.js';
 import { initMobileNav } from './modules/mobileNav.js';
 
@@ -21,7 +20,6 @@ const bootstrap = () => {
   initNavIndicator();
   initScrollReveal();
   initGamesCarousel();
-  initTestimonialsCarousel();
   initLazyMedia();
   initParallax();
   initMobileNav();
