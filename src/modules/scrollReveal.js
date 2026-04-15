@@ -2,11 +2,11 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 
 export function initScrollReveal() {
   const revealElements = document.querySelectorAll('[data-animate]');
-  if (!revealElements.length) return;
+  if (!revealElements.length) return undefined;
 
   if (prefersReducedMotion) {
     revealElements.forEach((element) => element.classList.add('visible'));
-    return;
+    return undefined;
   }
 
   const observer = new IntersectionObserver(
@@ -24,4 +24,8 @@ export function initScrollReveal() {
   );
 
   revealElements.forEach((element) => observer.observe(element));
+
+  return () => {
+    observer.disconnect();
+  };
 }

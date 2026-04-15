@@ -13,7 +13,7 @@ function hydrateImage(img) {
 export function initLazyMedia() {
   const lazyImages = Array.from(document.querySelectorAll('img[data-lazy]'));
   if (!lazyImages.length) {
-    return;
+    return undefined;
   }
 
   lazyImages.forEach((img) => {
@@ -25,7 +25,7 @@ export function initLazyMedia() {
     lazyImages.forEach((img) => {
       hydrateImage(img);
     });
-    return;
+    return undefined;
   }
 
   const lazyObserver = new IntersectionObserver((entries, observer) => {
@@ -56,4 +56,8 @@ export function initLazyMedia() {
     }
     lazyObserver.observe(img);
   });
+
+  return () => {
+    lazyObserver.disconnect();
+  };
 }

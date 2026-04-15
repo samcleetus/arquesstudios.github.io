@@ -2,15 +2,13 @@ const NAV_THRESHOLD = 0.3;
 
 export function initNavIndicator() {
   const nav = document.querySelector('[data-nav]');
-  if (!nav) return;
-  if (nav.dataset.navIndicatorInitialized === 'true') return;
-  nav.dataset.navIndicatorInitialized = 'true';
+  if (!nav) return undefined;
 
   const navLinks = Array.from(nav.querySelectorAll('a[href^="#"]'));
   const indicator = nav.querySelector('.nav-indicator');
 
   if (!indicator || navLinks.length === 0) {
-    return;
+    return undefined;
   }
 
   let activeLink = navLinks[0];
@@ -32,38 +30,60 @@ export function initNavIndicator() {
 
   moveIndicator(activeLink);
 
-  navLinks.forEach((link) => {
-    link.addEventListener('mouseenter', () => moveIndicator(link));
-    link.addEventListener('focus', () => moveIndicator(link));
-    link.addEventListener('click', () => {
+  const linkHandlers = navLinks.map((link) => {
+    const onMouseEnter = () => moveIndicator(link);
+    const onFocus = () => moveIndicator(link);
+    const onClick = () => {
       activeLink = link;
-    });
+    };
+
+    link.addEventListener('mouseenter', onMouseEnter);
+    link.addEventListener('focus', onFocus);
+    link.addEventListener('click', onClick);
+    return { link, onMouseEnter, onFocus, onClick };
   });
 
-  nav.addEventListener('mouseleave', () => moveIndicator(activeLink));
-  window.addEventListener('resize', () => moveIndicator(activeLink), { passive: true });
+  const onMouseLeave = () => moveIndicator(activeLink);
+  const onResize = () => moveIndicator(activeLink);
+  nav.addEventListener('mouseleave', onMouseLeave);
+  window.addEventListener('resize', onResize, { passive: true });
 
   const sections = navLinks
     .map((link) => document.querySelector(link.getAttribute('href')))
     .filter(Boolean);
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const match = navLinks.find((link) => link.getAttribute('href') === `#${entry.target.id}`);
-        if (!match) return;
+  let observer;
+  if (typeof IntersectionObserver !== 'undefined') {
+    observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const match = navLinks.find((link) => link.getAttribute('href') === `#${entry.target.id}`);
+          if (!match) return;
 
-        navLinks.forEach((link) => link.classList.remove('active'));
-        match.classList.add('active');
-        activeLink = match;
-        moveIndicator(match);
-      });
-    },
-    {
-      threshold: NAV_THRESHOLD,
-    }
-  );
+          navLinks.forEach((link) => link.classList.remove('active'));
+          match.classList.add('active');
+          activeLink = match;
+          moveIndicator(match);
+        });
+      },
+      {
+        threshold: NAV_THRESHOLD,
+      }
+    );
 
-  sections.forEach((section) => observer.observe(section));
+    sections.forEach((section) => observer.observe(section));
+  }
+
+  return () => {
+    if (frameId) cancelAnimationFrame(frameId);
+    linkHandlers.forEach(({ link, onMouseEnter, onFocus, onClick }) => {
+      link.removeEventListener('mouseenter', onMouseEnter);
+      link.removeEventListener('focus', onFocus);
+      link.removeEventListener('click', onClick);
+    });
+    nav.removeEventListener('mouseleave', onMouseLeave);
+    window.removeEventListener('resize', onResize);
+    observer?.disconnect();
+  };
 }

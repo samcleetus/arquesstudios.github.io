@@ -145,7 +145,14 @@ function getWrappedIndex(index, length) {
   return ((index % length) + length) % length;
 }
 
-function GameCard({ game, isCenter, isClone, onClick }) {
+function GameCard({ game, isCenter, isClone, isInteractive, onActivate }) {
+  const onKeyDown = (event) => {
+    if (!isInteractive) return;
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    event.preventDefault();
+    onActivate();
+  };
+
   return (
     <article
       className={`game-card${isCenter ? ' is-center' : ''}`}
@@ -153,7 +160,11 @@ function GameCard({ game, isCenter, isClone, onClick }) {
       data-carousel-clone={isClone ? 'true' : undefined}
       aria-hidden={isClone}
       inert={isClone ? '' : undefined}
-      onClick={onClick}
+      aria-label={isInteractive ? `View details for ${game.title}` : undefined}
+      role={isInteractive ? 'button' : undefined}
+      tabIndex={isInteractive ? 0 : undefined}
+      onClick={isInteractive ? onActivate : undefined}
+      onKeyDown={onKeyDown}
     >
       <header>
         {game.comingSoon ? (
@@ -412,7 +423,11 @@ function GamesCarousel() {
                 game={slide}
                 isCenter={slide.sourceIndex === activeRealIndex}
                 isClone={slide.isClone}
-                onClick={() => onCardClick(slide.sourceIndex, slideIndex)}
+                isInteractive={
+                  !slide.isClone &&
+                  (slide.sourceIndex === previousRealIndex || slide.sourceIndex === nextRealIndex)
+                }
+                onActivate={() => onCardClick(slide.sourceIndex, slideIndex)}
               />
             ))}
           </div>

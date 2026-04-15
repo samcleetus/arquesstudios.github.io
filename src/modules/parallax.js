@@ -1,10 +1,10 @@
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 export function initParallax() {
-  if (prefersReducedMotion) return;
+  if (prefersReducedMotion) return undefined;
 
   // Parallax is disabled on touch/mobile — it's jarring on small screens
-  if (!window.matchMedia('(hover: hover) and (min-width: 900px)').matches) return;
+  if (!window.matchMedia('(hover: hover) and (min-width: 900px)').matches) return undefined;
 
   const items = Array.from(document.querySelectorAll('[data-parallax]')).map((el) => ({
     el,
@@ -13,15 +13,16 @@ export function initParallax() {
     height: 0,
     isVisible: true,
   }));
-  if (!items.length) return;
+  if (!items.length) return undefined;
 
   let ticking = false;
   let viewportHeight = window.innerHeight;
+  let frameId = 0;
 
   const scheduleUpdate = () => {
     if (ticking) return;
     ticking = true;
-    requestAnimationFrame(() => {
+    frameId = requestAnimationFrame(() => {
       const viewportCenter = window.scrollY + viewportHeight / 2;
 
       items.forEach((item) => {
@@ -32,6 +33,7 @@ export function initParallax() {
       });
 
       ticking = false;
+      frameId = 0;
     });
   };
 
@@ -45,8 +47,9 @@ export function initParallax() {
     scheduleUpdate();
   };
 
+  let visibilityObserver;
   if (typeof IntersectionObserver !== 'undefined') {
-    const visibilityObserver = new IntersectionObserver((entries) => {
+    visibilityObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         const matched = items.find((item) => item.el === entry.target);
         if (!matched) return;
@@ -68,4 +71,15 @@ export function initParallax() {
   window.addEventListener('load', measure, { passive: true });
 
   measure();
+
+  return () => {
+    if (frameId) cancelAnimationFrame(frameId);
+    window.removeEventListener('scroll', scheduleUpdate);
+    window.removeEventListener('resize', measure);
+    window.removeEventListener('load', measure);
+    visibilityObserver?.disconnect();
+    items.forEach((item) => {
+      item.el.style.transform = '';
+    });
+  };
 }
