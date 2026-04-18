@@ -25,20 +25,20 @@ const GAMES = [
     genre: 'Educational',
     paragraphs: [
       <>
-        <strong>Cent Isle</strong> is an upcoming financial literacy game set on a tropical island
-        economy. Players manage resources, trade goods, and make investment decisions as they grow
-        their island from a small fishing village into a thriving financial hub.
+        <strong>Cent Isle</strong> is an interactive strategy game about surviving the economy.
       </>,
-      'Learn real-world money concepts through engaging gameplay - budgeting, saving, investing, and more.',
+      'Players build portfolios and structures designed to withstand changing financial conditions like inflation, volatility, and time. Each short, repeatable match challenges players to prepare a strategy and watch it endure as pressure builds.',
+      'Through intuitive, visual gameplay, Cent Isle helps players develop an instinct for concepts like compounding, real vs nominal returns, and long-term thinking without relying on lectures or formulas.',
+      'Prepare wisely. Endure the storm. Thrive on Cent Isle.',
     ],
     imageLayoutClass: 'single',
     images: [
       {
-        src: '/images/centIsle_placeholder.jpg',
+        src: '/images/Cent-Isle-1.png',
         placeholder: PLACEHOLDERS.wideTeal,
-        width: 1600,
-        height: 900,
-        alt: 'Placeholder concept art for Cent Isle',
+        width: 1170,
+        height: 1857,
+        alt: 'Concept art for Cent Isle',
       },
     ],
   },
