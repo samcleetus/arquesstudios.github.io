@@ -25,11 +25,11 @@ const GAMES = [
     genre: 'Educational',
     paragraphs: [
       <>
-        <strong>Cent Isle</strong> is an interactive strategy game about surviving the economy.
+        <strong>Cent Isle</strong> is a financial literacy game built to teach the intuition behind
+        investing through interactive gameplay.
       </>,
-      'Players build portfolios and structures designed to withstand changing financial conditions like inflation, volatility, and time. Each short, repeatable match challenges players to prepare a strategy and watch it endure as pressure builds.',
-      'Through intuitive, visual gameplay, Cent Isle helps players develop an instinct for concepts like compounding, real vs nominal returns, and long-term thinking without relying on lectures or formulas.',
-      'Prepare wisely. Endure the storm. Thrive on Cent Isle.',
+      'Each match drops you into a shifting economy where inflation, volatility, and time work against you. Build your portfolio, adapt your strategy, and see how your decisions hold up under real pressure.',
+      'No formulas. No textbooks. Just the instincts you\'ll actually use.',
     ],
     imageLayoutClass: 'single',
     images: [
