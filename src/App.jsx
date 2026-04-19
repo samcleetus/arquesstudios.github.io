@@ -143,7 +143,7 @@ function App() {
               className="fortress-frame"
               data-lazy=""
               data-parallax="0.15"
-              data-src="/images/about2.jpg"
+              data-src="/images/about.jpg"
               src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='3'%3E%3Crect width='2' height='3' fill='%230e1621'/%3E%3C/svg%3E"
               width="1178"
               height="1972"
