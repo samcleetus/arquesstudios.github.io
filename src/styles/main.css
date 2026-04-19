@@ -94,7 +94,6 @@
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(14, 22, 33, 0.08);
     z-index: 1000;
-    will-change: transform;
   }
 
   .logo {
