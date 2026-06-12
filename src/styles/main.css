@@ -418,7 +418,7 @@
 
   .section-heading {
     max-width: 680px;
-    margin-bottom: 2rem;
+    margin-bottom: clamp(0.5rem, 1.5vw, 1rem);
   }
 
   .section-heading h2 {
@@ -441,41 +441,66 @@
     color: rgba(14, 22, 33, 0.8);
   }
 
-  /* ─── Carousel ─── */
+  /* ─── Arch gallery (Games) ─── */
 
-  .games-carousel-shell {
+  .arch-gallery-shell {
     position: relative;
-    margin-top: clamp(1rem, 2.5vw, 2rem);
+    margin-top: clamp(0.25rem, 1vw, 0.75rem);
+    --arch-card-width: clamp(320px, 60vw, 700px);
   }
 
-  .games-carousel {
-    --games-card-width: clamp(300px, 62vw, 760px);
-    position: relative;
+  .arch-live {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
     overflow: hidden;
-    padding-inline: 0;
-    padding-bottom: 0.75rem;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .arch-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: min(80vw, 660px);
+    height: 82%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(closest-side, color-mix(in srgb, var(--game-accent, #5dd9cc) 55%, transparent), transparent 72%);
+    filter: blur(40px);
+    opacity: 0.5;
+    z-index: 0;
+    pointer-events: none;
+    transition: background 460ms ease;
+  }
+
+  .arch-gallery {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    padding-block: clamp(0.5rem, 1.5vw, 1.25rem) clamp(1.75rem, 4vw, 3rem);
     touch-action: pan-y;
   }
 
-  .games-carousel:focus-visible {
+  .arch-gallery:focus-visible {
     outline: 2px solid rgba(10, 60, 90, 0.4);
     outline-offset: 0.25rem;
-    border-radius: 1.25rem;
+    border-radius: 1rem;
   }
 
-  .games-carousel-track {
+  .arch-track {
     display: flex;
-    align-items: stretch;
-    gap: clamp(1rem, 3vw, 2rem);
+    align-items: flex-end;
+    gap: clamp(0.5rem, 2vw, 1.5rem);
     width: max-content;
     will-change: transform;
     transform: translateZ(0);
   }
 
-  .games-carousel-track.is-snapping .game-card,
-  .games-carousel-track.is-snapping .game-card::after,
-  .games-carousel-track.is-snapping .game-card h3,
-  .games-carousel-track.is-snapping .game-card p {
+  .arch-track.is-snapping .arch-window {
     transition: none !important;
   }
 
@@ -526,89 +551,80 @@
     right: clamp(0.25rem, 1.2vw, 0.8rem);
   }
 
-  .game-card {
-    background: rgba(245, 243, 231, 0.97);
-    border-radius: 0.25rem;
-    padding: clamp(1.2rem, 2.8vw, 2rem);
-    box-shadow: 0 10px 28px rgba(14, 22, 33, 0.1);
-    border: 1px solid rgba(218, 211, 191, 0.7);
-    border-top: 3px solid var(--stone);
+  .arch-window {
     position: relative;
-    overflow: hidden;
-    flex: 0 0 var(--games-card-width);
-    opacity: 0.8;
-    transform: scale(0.95);
-    transition: transform 380ms ease, box-shadow 380ms ease, background-color 380ms ease, color 380ms ease, opacity 380ms ease, border-color 380ms ease;
-    contain: paint;
+    flex: 0 0 var(--arch-card-width);
+    width: var(--arch-card-width);
+    transform: scale(0.9);
+    transform-origin: bottom center;
+    opacity: 0.5;
+    transition: transform 460ms cubic-bezier(0.22, 1, 0.36, 1), opacity 460ms ease;
     will-change: transform, opacity;
   }
 
-  .game-card[role='button'] {
-    cursor: pointer;
-  }
-
-  .game-card[role='button']:focus-visible {
-    outline: 3px solid rgba(251, 198, 92, 0.9);
-    outline-offset: 3px;
-  }
-
-  .game-card p {
-    margin: 0 0 0.75rem;
-    line-height: 1.5;
-    font-size: 0.98rem;
-  }
-
-  .game-card[data-carousel-clone='true'] {
-    pointer-events: none;
-  }
-
-  .game-card h3,
-  .game-card p {
-    transition: color 400ms ease;
-  }
-
-  .game-card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url('/images/texture2.jpeg');
-    background-size: 200px 200px;
-    background-repeat: repeat;
-    opacity: 0;
-    transition: opacity 400ms ease;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .game-card > * {
-    position: relative;
+  .arch-window.is-center {
+    transform: scale(1);
+    opacity: 1;
     z-index: 2;
   }
 
-  .game-card.is-center {
-    background: rgba(14, 22, 33, 0.9);
-    color: white;
-    transform: scale(1);
-    opacity: 1;
-    border-color: rgba(255, 171, 43, 0.2);
-    border-top-color: rgba(255, 171, 43, 0.4);
-    box-shadow: 0 24px 56px rgba(9, 38, 54, 0.3);
+  .arch-window[data-carousel-clone='true'] {
+    pointer-events: none;
   }
 
-  .game-card.is-center::after {
-    opacity: 0.22;
+  /* Game card with a curved (arched) top */
+  .arch-card {
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    padding: clamp(85px, 12vw, 135px) clamp(1.4rem, 3vw, 2.4rem) clamp(1.4rem, 3vw, 2.2rem);
+    background:
+      linear-gradient(180deg, rgba(36, 51, 68, 0.9), rgba(27, 40, 55, 0.94)),
+      url('/images/texture2.jpeg');
+    background-size: cover, 220px 220px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-top: 3px solid var(--game-accent, var(--accent-yellow));
+    border-radius: 50% 50% 6px 6px / clamp(70px, 10vw, 120px) clamp(70px, 10vw, 120px) 6px 6px;
+    box-shadow: 0 18px 40px rgba(9, 38, 54, 0.3);
   }
 
-  .game-card.is-center h3,
-  .game-card.is-center p {
-    color: white;
+  /* VERY slight decorative inner frame following the arch */
+  .arch-card::before {
+    content: '';
+    position: absolute;
+    inset: clamp(5px, 0.9vw, 9px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50% 50% 4px 4px / clamp(62px, 9vw, 112px) clamp(62px, 9vw, 112px) 4px 4px;
+    pointer-events: none;
   }
 
-  .game-card.is-center a {
-    color: rgb(251, 198, 92);
+  .arch-window.is-center .arch-card {
+    box-shadow: 0 26px 58px rgba(9, 38, 54, 0.42);
+    border-color: rgba(255, 255, 255, 0.12);
+    border-top-color: var(--game-accent, var(--accent-yellow));
+  }
+
+  /* Dim the unlit (non-center) cards */
+  .arch-window:not(.is-center) .arch-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 12, 20, 0.5);
+    pointer-events: none;
+  }
+
+  .arch-card-head {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+  }
+
+  .arch-card-head h3 {
+    margin: 0;
+    font-size: clamp(1.6rem, 3vw, 2.3rem);
+    color: #fff;
   }
 
   /* ─── Badges ─── */
@@ -645,88 +661,85 @@
     border: 1px solid rgba(93, 217, 204, 0.4);
   }
 
-  .game-card.is-center .badge--platform {
+  .arch-card .badge--platform {
     background: rgba(255, 255, 255, 0.1);
     color: rgba(255, 255, 255, 0.85);
     border-color: rgba(255, 255, 255, 0.2);
   }
 
-  .game-card.is-center .badge--genre {
-    background: rgba(251, 198, 92, 0.18);
-    color: rgb(251, 198, 92);
-    border-color: rgba(251, 198, 92, 0.3);
+  .arch-card .badge--genre {
+    background: color-mix(in srgb, var(--game-accent) 22%, transparent);
+    color: var(--game-accent);
+    border-color: color-mix(in srgb, var(--game-accent) 40%, transparent);
   }
 
-  .game-card.is-center .badge--coming-soon {
+  .arch-card .badge--coming-soon {
     background: rgba(93, 217, 204, 0.18);
     color: rgb(93, 217, 204);
     border-color: rgba(93, 217, 204, 0.3);
-  }
-
-  .game-card[data-game='ascata']        { border-top-color: #e8723a; }
-  .game-card[data-game='cent-isle']     { border-top-color: #c99a10; }
-  .game-card[data-game='crownlands']    { border-top-color: #3d7a52; }
-  .game-card[data-game='kings-crest']   { border-top-color: #5e3ea8; }
-
-  .game-card.is-center[data-game='ascata']      { border-top-color: #f08050; }
-  .game-card.is-center[data-game='cent-isle']   { border-top-color: #d4a820; }
-  .game-card.is-center[data-game='crownlands']  { border-top-color: #4e9466; }
-  .game-card.is-center[data-game='kings-crest'] { border-top-color: #7c58c8; }
-
-  .game-card-title-row {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    margin-bottom: 0.25rem;
-  }
-
-  .game-card-title-row h3 {
-    margin: 0;
   }
 
   .game-meta {
     display: flex;
     align-items: center;
     gap: 0.4rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.6rem;
   }
 
-  .game-card header h3 {
-    font-size: clamp(1.5rem, 2.4vw, 2rem);
+  .arch-card .game-meta {
+    margin-bottom: 0.9rem;
   }
 
+  .arch-card p {
+    margin: 0 0 0.85rem;
+    line-height: 1.6;
+    font-size: clamp(0.9rem, 1.1vw, 1rem);
+    color: rgba(255, 255, 255, 0.86);
+  }
+
+  .arch-card a {
+    color: var(--game-accent, var(--accent-yellow));
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  /* Game imagery — shown in full (object-fit: contain) */
   .game-images {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 0.75rem;
-    margin-top: 1rem;
-  }
-
-  .game-images.ascata-gallery img {
-    max-width: clamp(130px, 16vw, 180px);
-    max-height: clamp(220px, 28vh, 300px);
-    width: auto;
-    object-fit: contain;
-    margin-inline: auto;
-  }
-
-  .game-images.single {
-    grid-template-columns: minmax(320px, 720px);
-    justify-content: center;
+    gap: 0.85rem;
+    margin-top: 1.25rem;
   }
 
   .game-images figure {
     margin: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .game-images.single {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
   }
 
   .game-images.single img {
     width: auto;
     height: auto;
-    max-width: clamp(280px, 54vw, 560px);
-    max-height: clamp(190px, 28vw, 300px);
+    max-width: min(100%, 460px);
+    max-height: clamp(220px, 34vw, 360px);
     object-fit: contain;
-    margin-inline: auto;
+  }
+
+  .game-images.ascata-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .game-images.ascata-gallery img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: clamp(240px, 32vw, 360px);
+    object-fit: contain;
   }
 
   .contact {
@@ -910,10 +923,15 @@
 
   html.perf-lite .site-header,
   html.perf-lite .carousel-control,
-  html.perf-lite .game-card,
   html.perf-lite .primary-nav {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
+  }
+
+  html.perf-lite .arch-glow {
+    animation: none;
+    filter: blur(26px);
+    opacity: 0.4;
   }
 
   html.perf-lite .floating-orb,
@@ -1016,12 +1034,9 @@
     margin-inline: auto;
   }
 
-  .games-carousel-shell {
+  .arch-gallery-shell {
     padding-bottom: 3.6rem;
-  }
-
-  .games-carousel {
-    --games-card-width: min(92vw, 620px);
+    --arch-card-width: min(90vw, 560px);
   }
 
   .carousel-control {

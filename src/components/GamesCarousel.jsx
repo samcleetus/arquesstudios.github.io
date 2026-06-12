@@ -20,6 +20,7 @@ const GAMES = [
   {
     id: 'cent-isle',
     title: 'Cent Isle',
+    accent: '#d4a820',
     comingSoon: true,
     platform: 'Mobile',
     genre: 'Educational',
@@ -45,6 +46,7 @@ const GAMES = [
   {
     id: 'ascata',
     title: 'Ascata',
+    accent: '#f08050',
     platform: 'iOS',
     genre: 'Platformer',
     paragraphs: [
@@ -77,6 +79,7 @@ const GAMES = [
   {
     id: 'crownlands',
     title: 'Crownlands',
+    accent: '#4e9466',
     platform: 'Web',
     genre: 'World-Builder',
     paragraphs: [
@@ -108,6 +111,7 @@ const GAMES = [
   {
     id: 'kings-crest',
     title: "King's Crest",
+    accent: '#7c58c8',
     comingSoon: true,
     platform: 'PC',
     genre: 'Narrative',
@@ -145,60 +149,45 @@ function getWrappedIndex(index, length) {
   return ((index % length) + length) % length;
 }
 
-function GameCard({ game, isCenter, isClone, isInteractive, onActivate }) {
-  const onKeyDown = (event) => {
-    if (!isInteractive) return;
-    if (event.key !== 'Enter' && event.key !== ' ') return;
-    event.preventDefault();
-    onActivate();
-  };
-
+function ArchWindow({ game, isCenter, isClone }) {
   return (
     <article
-      className={`game-card${isCenter ? ' is-center' : ''}`}
+      className={`arch-window${isCenter ? ' is-center' : ''}`}
       data-carousel-card=""
       data-game={game.id}
       data-carousel-clone={isClone ? 'true' : undefined}
-      aria-hidden={isClone}
+      aria-hidden={isClone || !isCenter ? 'true' : undefined}
       inert={isClone ? '' : undefined}
-      aria-label={isInteractive ? `View details for ${game.title}` : undefined}
-      role={isInteractive ? 'button' : undefined}
-      tabIndex={isInteractive ? 0 : undefined}
-      onClick={isInteractive ? onActivate : undefined}
-      onKeyDown={onKeyDown}
+      style={{ '--game-accent': game.accent }}
     >
-      <header>
-        {game.comingSoon ? (
-          <div className="game-card-title-row">
-            <h3>{game.title}</h3>
-            <span className="badge badge--coming-soon">Coming Soon</span>
-          </div>
-        ) : (
+      <div className="arch-card">
+        <header className="arch-card-head">
           <h3>{game.title}</h3>
-        )}
-      </header>
-      <div className="game-meta">
-        <span className="badge badge--platform">{game.platform}</span>
-        <span className="badge badge--genre">{game.genre}</span>
-      </div>
-      {game.paragraphs.map((paragraph, index) => (
-        <p key={`${game.id}-paragraph-${index}`}>{paragraph}</p>
-      ))}
-      <div className={`game-images ${game.imageLayoutClass}`}>
-        {game.images.map((image, index) => (
-          <figure key={`${game.id}-image-${index}`}>
-            <img
-              className="fortress-frame"
-              data-lazy=""
-              data-src={image.src}
-              src={image.placeholder}
-              width={image.width}
-              height={image.height}
-              alt={image.alt}
-              decoding="async"
-            />
-          </figure>
+          {game.comingSoon && <span className="badge badge--coming-soon">Coming Soon</span>}
+        </header>
+        <div className="game-meta">
+          <span className="badge badge--platform">{game.platform}</span>
+          <span className="badge badge--genre">{game.genre}</span>
+        </div>
+        {game.paragraphs.map((paragraph, index) => (
+          <p key={`${game.id}-paragraph-${index}`}>{paragraph}</p>
         ))}
+        <div className={`game-images ${game.imageLayoutClass}`}>
+          {game.images.map((image, index) => (
+            <figure key={`${game.id}-image-${index}`}>
+              <img
+                className="fortress-frame"
+                data-lazy=""
+                data-src={image.src}
+                src={image.placeholder}
+                width={image.width}
+                height={image.height}
+                alt={image.alt}
+                decoding="async"
+              />
+            </figure>
+          ))}
+        </div>
       </div>
     </article>
   );
@@ -328,20 +317,6 @@ function GamesCarousel() {
   );
 
   const activeRealIndex = getWrappedIndex(activeSlide - firstRealSlide, totalGames);
-  const previousRealIndex = getWrappedIndex(activeRealIndex - 1, totalGames);
-  const nextRealIndex = getWrappedIndex(activeRealIndex + 1, totalGames);
-
-  const onCardClick = useCallback(
-    (sourceIndex, slideIndex) => {
-      if (isAnimating || sourceIndex === activeRealIndex) return;
-      if (sourceIndex === previousRealIndex) {
-        moveBy(-1);
-      } else if (sourceIndex === nextRealIndex) {
-        moveBy(1);
-      }
-    },
-    [activeRealIndex, isAnimating, moveBy, nextRealIndex, previousRealIndex]
-  );
 
   const onKeyDown = useCallback(
     (event) => {
@@ -381,6 +356,8 @@ function GamesCarousel() {
         : 'none',
   };
 
+  const activeGame = GAMES[activeRealIndex];
+
   return (
     <section id="games" className="games" aria-label="Arques Studios Games" data-defense="keep">
       <div className="section-heading" data-animate="">
@@ -391,7 +368,9 @@ function GamesCarousel() {
         </p>
       </div>
 
-      <div className="games-carousel-shell">
+      <div className="arch-gallery-shell">
+        <div className="arch-glow" aria-hidden="true" style={{ '--game-accent': activeGame.accent }} />
+
         <button
           type="button"
           className="carousel-control carousel-control--prev"
@@ -404,9 +383,9 @@ function GamesCarousel() {
 
         <div
           ref={viewportRef}
-          className="games-carousel"
+          className="arch-gallery"
           tabIndex="0"
-          aria-label="Arques Studios games carousel"
+          aria-label="Arques Studios games gallery"
           aria-roledescription="carousel"
           onKeyDown={onKeyDown}
           onTouchStart={onTouchStart}
@@ -414,21 +393,16 @@ function GamesCarousel() {
         >
           <div
             ref={trackRef}
-            className={`games-carousel-track${isSnapping ? ' is-snapping' : ''}`}
+            className={`arch-track${isSnapping ? ' is-snapping' : ''}`}
             style={trackStyle}
             onTransitionEnd={onTrackTransitionEnd}
           >
             {slides.map((slide, slideIndex) => (
-              <GameCard
+              <ArchWindow
                 key={`${slide.cloneKey}-${slideIndex}`}
                 game={slide}
                 isCenter={slide.sourceIndex === activeRealIndex}
                 isClone={slide.isClone}
-                isInteractive={
-                  !slide.isClone &&
-                  (slide.sourceIndex === previousRealIndex || slide.sourceIndex === nextRealIndex)
-                }
-                onActivate={() => onCardClick(slide.sourceIndex, slideIndex)}
               />
             ))}
           </div>
@@ -444,6 +418,10 @@ function GamesCarousel() {
           <span aria-hidden="true">&#8250;</span>
         </button>
       </div>
+
+      <p className="arch-live" aria-live="polite">
+        {`${activeGame.title} — ${activeGame.platform}, ${activeGame.genre}`}
+      </p>
     </section>
   );
 }
