@@ -6,6 +6,33 @@ import { initParallax } from './modules/parallax.js';
 import { initMobileNav } from './modules/mobileNav.js';
 import GamesCarousel from './components/GamesCarousel.jsx';
 
+function WeaponDivider() {
+  // Arrow: tip at top, shaft below — centered at origin
+  const arrow = 'M0,-10 L4,-4 L2,-4 L2,10 L-2,10 L-2,-4 L-4,-4 Z';
+  // Dagger: tapered blade tip at top, handle below — centered at origin
+  const dagger = 'M0,-9 L2.5,-2 L1.5,-2 L1.5,9 L-1.5,9 L-1.5,-2 L-2.5,-2 Z';
+  // Sword: blade up, crossguard centered on line (y=±1), handle below
+  const sword = 'M0,-12 L1.5,-12 L1.5,-1 L7,-1 L7,1 L1.5,1 L1.5,10 L-1.5,10 L-1.5,1 L-7,1 L-7,-1 L-1.5,-1 L-1.5,-12 Z';
+
+  const fill = 'rgba(255,171,43,0.72)';
+
+  return (
+    <div className="weapon-divider" aria-hidden="true" role="presentation">
+      <svg width="100%" height="40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <pattern id="wp" x="0" y="0" width="180" height="40" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="20" x2="180" y2="20" stroke="rgba(255,171,43,0.18)" strokeWidth="1" />
+            <path d={arrow}  transform="translate(30,20)"  fill={fill} />
+            <path d={dagger} transform="translate(90,20)"  fill={fill} />
+            <path d={sword}  transform="translate(150,20)" fill={fill} />
+          </pattern>
+        </defs>
+        <rect width="100%" height="40" fill="url(#wp)" />
+      </svg>
+    </div>
+  );
+}
+
 function initScrollTop() {
   const btn = document.getElementById('scroll-top');
   if (!btn) return undefined;
@@ -110,11 +137,11 @@ function App() {
           </div>
         </main>
 
-        <div className="castle-divider" aria-hidden="true" />
+        <WeaponDivider />
 
         <GamesCarousel />
 
-        <div className="castle-divider" aria-hidden="true" />
+        <WeaponDivider />
 
         <section id="about" className="about" aria-label="About Arques Studios" data-defense="inner">
           <div className="floating-orb orb-3" aria-hidden="true" />
@@ -153,7 +180,7 @@ function App() {
           </div>
         </section>
 
-        <div className="castle-divider" aria-hidden="true" />
+        <WeaponDivider />
 
         <section id="contact" className="contact" aria-label="Contact Arques Studios">
           <div className="contact-card" data-animate="">

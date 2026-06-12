@@ -3,7 +3,7 @@
 @layer base {
   :root {
     color-scheme: light;
-    font-family: 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Lora', 'Georgia', serif;
     --cream: #f5f3e7;
     --dark-blue: #0e1621;
     --teal-blue: #0a3c5a;
@@ -27,8 +27,8 @@
     margin: 0;
     background-color: var(--cream);
     color: var(--dark-blue);
-    font-size: clamp(1rem, 1vw + 0.8rem, 1.1rem);
-    line-height: 1.6;
+    font-size: clamp(0.95rem, 1vw + 0.75rem, 1.05rem);
+    line-height: 1.7;
     min-height: 100vh;
     scroll-behavior: smooth;
     position: relative;
@@ -41,9 +41,10 @@
     position: fixed;
     inset: 0;
     background:
-      radial-gradient(circle at 15% 20%, rgba(98, 176, 204, 0.25), transparent 40%),
-      radial-gradient(circle at 80% 0%, rgba(93, 217, 204, 0.18), transparent 45%),
-      repeating-linear-gradient(135deg, rgba(14, 22, 33, 0.04) 0, rgba(14, 22, 33, 0.04) 2px, transparent 2px, transparent 12px);
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E"),
+      radial-gradient(circle at 15% 20%, rgba(98, 176, 204, 0.22), transparent 40%),
+      radial-gradient(circle at 80% 0%, rgba(93, 217, 204, 0.15), transparent 45%),
+      repeating-linear-gradient(135deg, rgba(14, 22, 33, 0.035) 0, rgba(14, 22, 33, 0.035) 2px, transparent 2px, transparent 12px);
     pointer-events: none;
     z-index: -2;
   }
@@ -69,10 +70,11 @@
   }
 
   h1, h2, h3 {
-    font-family: 'Playfair Display', 'Georgia', serif;
+    font-family: 'Cinzel', 'Georgia', serif;
     line-height: 1.2;
     margin-top: 0;
     color: var(--dark-blue);
+    letter-spacing: 0.04em;
   }
 
   section {
@@ -105,7 +107,8 @@
 
   .logo-text h1 {
     margin: 0;
-    font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+    font-size: clamp(1rem, 1.6vw, 1.35rem);
+    letter-spacing: 0.05em;
   }
 
   .primary-nav {
@@ -197,35 +200,43 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.95rem 2.5rem;
-    border-radius: 999px;
+    padding: 0.9rem 2.4rem;
+    border-radius: 0;
+    font-family: 'Cinzel', 'Georgia', serif;
+    font-size: 0.85em;
     font-weight: 700;
+    letter-spacing: 0.08em;
     border: none;
     cursor: pointer;
-    transition: transform 200ms ease, box-shadow 200ms ease;
-    box-shadow: 0 15px 35px rgba(14, 22, 33, 0.15);
+    clip-path: polygon(10px 0%, calc(100% - 10px) 0%, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0% calc(100% - 10px), 0% 10px);
+    transition: transform 200ms ease, filter 200ms ease;
   }
 
   .button--primary {
-    background: rgb(251, 198, 92);
+    background: var(--accent-yellow);
     color: var(--dark-blue);
+    filter: drop-shadow(0 8px 20px rgba(255, 171, 43, 0.35));
   }
 
   .button--primary:hover {
     background: rgb(245, 190, 80);
-    transform: translateY(-2px) scale(1.01);
+    transform: translateY(-2px) scale(1.02);
+    filter: drop-shadow(0 12px 28px rgba(255, 171, 43, 0.55));
   }
 
   .button--ghost {
-    border: 2px solid rgba(255, 255, 255, 0.8);
+    outline: 2px solid rgba(255, 255, 255, 0.75);
+    outline-offset: -2px;
     background: transparent;
     color: #fff;
+    filter: drop-shadow(0 6px 16px rgba(14, 22, 33, 0.25));
   }
 
   .button--ghost:hover {
-    background: rgb(251, 198, 92);
+    background: var(--accent-yellow);
     color: var(--dark-blue);
-    border-color: transparent;
+    outline-color: transparent;
+    filter: drop-shadow(0 8px 20px rgba(255, 171, 43, 0.4));
   }
 
   .hero {
@@ -276,9 +287,14 @@
 
 
   .hero-left h2 {
-    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-size: clamp(2.8rem, 5.5vw, 4.2rem);
     margin-bottom: 1rem;
-    letter-spacing: -0.02em;
+    letter-spacing: 0.02em;
+  }
+
+  #hero-heading {
+    font-family: 'Cinzel Decorative', 'Georgia', serif;
+    letter-spacing: 0.03em;
   }
 
   .hero-right img {
@@ -337,14 +353,13 @@
     mask-image: linear-gradient(#000, transparent);
   }
 
-  .castle-divider {
+  .weapon-divider {
     width: 100%;
-    height: 3rem;
-    background-image:
-      linear-gradient(90deg, rgba(14, 22, 33, 0.08) 25%, transparent 25%),
-      repeating-linear-gradient(90deg, var(--stone) 0, var(--stone) 3rem, transparent 3rem, transparent 4rem);
-    background-size: 1rem 100%, 4rem 100%;
-    mask-image: linear-gradient(transparent 10%, #000 50%, transparent 90%);
+    display: block;
+    line-height: 0;
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent 0%, #000 5%, #000 95%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 5%, #000 95%, transparent 100%);
   }
 
   .about {
@@ -363,6 +378,17 @@
 
   .about h2 {
     color: #fff;
+  }
+
+  .about-text p:first-of-type::first-letter {
+    font-family: 'Cinzel Decorative', 'Georgia', serif;
+    font-size: 3.8em;
+    font-weight: 700;
+    color: var(--accent-yellow);
+    float: left;
+    line-height: 0.72;
+    padding-right: 0.12em;
+    padding-top: 0.08em;
   }
 
   .about-img {
@@ -393,6 +419,22 @@
   .section-heading {
     max-width: 680px;
     margin-bottom: 2rem;
+  }
+
+  .section-heading h2 {
+    padding-bottom: 0.85rem;
+    position: relative;
+  }
+
+  .section-heading h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 3.5rem;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-yellow), var(--accent-amber), transparent);
+    border-radius: 1px;
   }
 
   .section-intro {
@@ -485,18 +527,18 @@
   }
 
   .game-card {
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 1.75rem;
+    background: rgba(245, 243, 231, 0.97);
+    border-radius: 0.25rem;
     padding: clamp(1.2rem, 2.8vw, 2rem);
-    box-shadow: 0 14px 30px rgba(14, 22, 33, 0.12);
-    border: 1px solid rgba(14, 22, 33, 0.05);
-    backdrop-filter: blur(6px);
+    box-shadow: 0 10px 28px rgba(14, 22, 33, 0.1);
+    border: 1px solid rgba(218, 211, 191, 0.7);
+    border-top: 3px solid var(--stone);
     position: relative;
     overflow: hidden;
     flex: 0 0 var(--games-card-width);
     opacity: 0.8;
     transform: scale(0.95);
-    transition: transform 380ms ease, box-shadow 380ms ease, background-color 380ms ease, color 380ms ease, opacity 380ms ease;
+    transition: transform 380ms ease, box-shadow 380ms ease, background-color 380ms ease, color 380ms ease, opacity 380ms ease, border-color 380ms ease;
     contain: paint;
     will-change: transform, opacity;
   }
@@ -547,15 +589,17 @@
   }
 
   .game-card.is-center {
-    background: rgba(9, 38, 54, 0.6);
+    background: rgba(14, 22, 33, 0.9);
     color: white;
     transform: scale(1);
     opacity: 1;
-    box-shadow: 0 24px 56px rgba(9, 38, 54, 0.22);
+    border-color: rgba(255, 171, 43, 0.2);
+    border-top-color: rgba(255, 171, 43, 0.4);
+    box-shadow: 0 24px 56px rgba(9, 38, 54, 0.3);
   }
 
   .game-card.is-center::after {
-    opacity: 0.15;
+    opacity: 0.22;
   }
 
   .game-card.is-center h3,
@@ -573,12 +617,13 @@
     display: inline-flex;
     align-items: center;
     padding: 0.25rem 0.65rem;
-    border-radius: 999px;
+    border-radius: 0;
+    clip-path: polygon(6px 0%, calc(100% - 6px) 0%, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0% calc(100% - 6px), 0% 6px);
     font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    font-family: 'Roboto', system-ui, sans-serif;
+    font-family: 'Cinzel', 'Georgia', serif;
     white-space: nowrap;
   }
 
@@ -617,6 +662,16 @@
     color: rgb(93, 217, 204);
     border-color: rgba(93, 217, 204, 0.3);
   }
+
+  .game-card[data-game='ascata']        { border-top-color: #e8723a; }
+  .game-card[data-game='cent-isle']     { border-top-color: #c99a10; }
+  .game-card[data-game='crownlands']    { border-top-color: #3d7a52; }
+  .game-card[data-game='kings-crest']   { border-top-color: #5e3ea8; }
+
+  .game-card.is-center[data-game='ascata']      { border-top-color: #f08050; }
+  .game-card.is-center[data-game='cent-isle']   { border-top-color: #d4a820; }
+  .game-card.is-center[data-game='crownlands']  { border-top-color: #4e9466; }
+  .game-card.is-center[data-game='kings-crest'] { border-top-color: #7c58c8; }
 
   .game-card-title-row {
     display: flex;
@@ -734,9 +789,9 @@
   /* ─── Footer ─── */
 
   .site-footer {
-    background: rgba(255, 255, 255, 0.85);
-    border-top: 1px solid rgba(14, 22, 33, 0.08);
-    color: var(--dark-teal);
+    background: var(--teal-blue);
+    border-top: none;
+    color: rgba(245, 243, 231, 0.75);
     padding: 2.5rem clamp(1.5rem, 5vw, 10%) 2rem;
   }
 
@@ -753,9 +808,11 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-family: 'Playfair Display', 'Georgia', serif;
+    font-family: 'Cinzel', 'Georgia', serif;
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+    color: var(--cream);
   }
 
   .footer-nav {
@@ -768,14 +825,13 @@
   }
 
   .footer-nav a {
-    color: var(--dark-teal);
-    opacity: 0.75;
-    transition: color 200ms ease, opacity 200ms ease;
+    color: rgba(245, 243, 231, 0.65);
+    opacity: 1;
+    transition: color 200ms ease;
   }
 
   .footer-nav a:hover {
-    color: var(--teal-blue);
-    opacity: 1;
+    color: var(--accent-yellow);
   }
 
   .footer-social {
@@ -791,23 +847,23 @@
     width: 2.25rem;
     height: 2.25rem;
     border-radius: 50%;
-    background: rgba(14, 22, 33, 0.06);
-    color: var(--dark-teal);
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(245, 243, 231, 0.7);
     transition: background 200ms ease, color 200ms ease, transform 200ms ease;
   }
 
   .footer-social a:hover {
-    background: var(--teal-blue);
-    color: #fff;
+    background: var(--accent-yellow);
+    color: var(--dark-blue);
     transform: translateY(-2px);
   }
 
   .footer-copy {
     text-align: center;
-    font-size: 0.85rem;
-    opacity: 0.55;
+    font-size: 0.82rem;
+    color: rgba(245, 243, 231, 0.38);
     margin: 0;
-    border-top: 1px solid rgba(14, 22, 33, 0.07);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
     padding-top: 1.25rem;
   }
 

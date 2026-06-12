@@ -157,6 +157,7 @@ function GameCard({ game, isCenter, isClone, isInteractive, onActivate }) {
     <article
       className={`game-card${isCenter ? ' is-center' : ''}`}
       data-carousel-card=""
+      data-game={game.id}
       data-carousel-clone={isClone ? 'true' : undefined}
       aria-hidden={isClone}
       inert={isClone ? '' : undefined}
