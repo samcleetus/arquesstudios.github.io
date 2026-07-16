@@ -447,6 +447,7 @@
     position: relative;
     margin-top: clamp(0.25rem, 1vw, 0.75rem);
     --arch-card-width: clamp(320px, 60vw, 700px);
+    --game-image-height: clamp(220px, 32vw, 360px);
   }
 
   .arch-live {
@@ -491,9 +492,11 @@
     border-radius: 1rem;
   }
 
+  /* stretch, not flex-end: every arch matches the tallest card, so the arch tops
+     stay level instead of jumping as you cycle between cards of differing length. */
   .arch-track {
     display: flex;
-    align-items: flex-end;
+    align-items: stretch;
     gap: clamp(0.5rem, 2vw, 1.5rem);
     width: max-content;
     will-change: transform;
@@ -553,6 +556,7 @@
 
   .arch-window {
     position: relative;
+    display: flex;
     flex: 0 0 var(--arch-card-width);
     width: var(--arch-card-width);
     transform: scale(0.9);
@@ -575,6 +579,9 @@
   /* Game card with a curved (arched) top */
   .arch-card {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
     overflow: hidden;
     color: #fff;
     padding: clamp(85px, 12vw, 135px) clamp(1.4rem, 3vw, 2.4rem) clamp(1.4rem, 3vw, 2.2rem);
@@ -690,6 +697,13 @@
     margin-bottom: 0.9rem;
   }
 
+  /* Slack from the stretched card height collects above the imagery, keeping the
+     image row anchored at the same height on every card. */
+  .arch-card .game-images {
+    margin-top: auto;
+    padding-top: 1.25rem;
+  }
+
   .arch-card p {
     margin: 0 0 0.85rem;
     line-height: 1.6;
@@ -711,10 +725,21 @@
     margin-top: 1.25rem;
   }
 
+  /* The figure reserves the full image box up front, so a card's height does not
+     change when its lazy-loaded image swaps in over the placeholder. */
   .game-images figure {
     margin: 0;
     display: flex;
+    align-items: center;
     justify-content: center;
+    height: var(--game-image-height);
+  }
+
+  .game-images img {
+    width: auto;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
   }
 
   .game-images.single {
@@ -723,11 +748,7 @@
   }
 
   .game-images.single img {
-    width: auto;
-    height: auto;
     max-width: min(100%, 460px);
-    max-height: clamp(220px, 34vw, 360px);
-    object-fit: contain;
   }
 
   .game-images.ascata-gallery {
@@ -735,11 +756,7 @@
   }
 
   .game-images.ascata-gallery img {
-    width: auto;
-    height: auto;
     max-width: 100%;
-    max-height: clamp(240px, 32vw, 360px);
-    object-fit: contain;
   }
 
   .contact {
