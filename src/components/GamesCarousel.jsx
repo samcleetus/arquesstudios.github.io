@@ -14,32 +14,34 @@ const PLACEHOLDERS = {
     "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='9'%3E%3Crect width='16' height='9' fill='%2300897b'/%3E%3C/svg%3E",
   wideAqua:
     "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='9'%3E%3Crect width='16' height='9' fill='%235dd9cc'/%3E%3C/svg%3E",
+  wideSpruce:
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='63' height='50'%3E%3Crect width='63' height='50' fill='%231d7a75'/%3E%3C/svg%3E",
 };
 
 const GAMES = [
   {
-    id: 'cent-isle',
-    title: 'Cent Isle',
-    accent: '#d4a820',
+    id: 'handborne',
+    title: 'Handborne',
+    accent: '#d2504c',
     comingSoon: true,
-    platform: 'Mobile',
-    genre: 'Educational',
+    platform: 'PC',
+    genre: 'Platformer',
     paragraphs: [
       <>
-        <strong>Cent Isle</strong> is a financial literacy game built to teach the intuition behind
-        investing through interactive gameplay.
+        <strong>Handborne</strong> is an experimental platformer controlled through physical hand
+        gestures captured by an ordinary webcam. Walk with two fingers. Jump with the motion of your
+        hand.
       </>,
-      'Each match drops you into a shifting economy where inflation, volatility, and time work against you. Build your portfolio, adapt your strategy, and see how your decisions hold up under real pressure.',
-      'No formulas. No textbooks. Just the instincts you\'ll actually use.',
+      'The game is the first public demonstration of MotionCore, a gesture-input system designed to translate physical movement into responsive gameplay. Handborne exists to test that mechanism in a real game and to explore how new forms of input can inspire new forms of game design.',
     ],
     imageLayoutClass: 'single',
     images: [
       {
-        src: '/images/Cent-Isle-1.png',
-        placeholder: PLACEHOLDERS.wideTeal,
-        width: 1170,
-        height: 1857,
-        alt: 'Concept art for Cent Isle',
+        src: '/images/Handborne.png',
+        placeholder: PLACEHOLDERS.wideSpruce,
+        width: 1260,
+        height: 1000,
+        alt: 'Title art for Handborne',
       },
     ],
   },
@@ -77,6 +79,32 @@ const GAMES = [
     ],
   },
   {
+    id: 'cent-isle',
+    title: 'Cent Isle',
+    accent: '#d4a820',
+    comingSoon: true,
+    platform: 'Mobile',
+    genre: 'Educational',
+    paragraphs: [
+      <>
+        <strong>Cent Isle</strong> is a financial literacy game built to teach the intuition behind
+        investing through interactive gameplay.
+      </>,
+      'Each match drops you into a shifting economy where inflation, volatility, and time work against you. Build your portfolio, adapt your strategy, and see how your decisions hold up under real pressure.',
+      'No formulas. No textbooks. Just the instincts you\'ll actually use.',
+    ],
+    imageLayoutClass: 'single',
+    images: [
+      {
+        src: '/images/Cent-Isle-1.png',
+        placeholder: PLACEHOLDERS.wideTeal,
+        width: 1170,
+        height: 1857,
+        alt: 'Concept art for Cent Isle',
+      },
+    ],
+  },
+  {
     id: 'crownlands',
     title: 'Crownlands',
     accent: '#4e9466',
@@ -105,37 +133,6 @@ const GAMES = [
         width: 2001,
         height: 1927,
         alt: 'Concept art of a procedurally generated Crownlands realm',
-      },
-    ],
-  },
-  {
-    id: 'kings-crest',
-    title: "King's Crest",
-    accent: '#7c58c8',
-    comingSoon: true,
-    platform: 'PC',
-    genre: 'Narrative',
-    paragraphs: [
-      <>
-        <strong>King&apos;s Crest</strong> is Arques Studios&apos; next major project - a story-driven
-        first-person exploration game about solitude, perseverance, and truth. As a traveler climbing
-        a mountain cloaked in secrecy, players uncover why the monarchs isolated themselves, and must
-        confront the emotional and moral weight of their own journey.
-      </>,
-      <>
-        Built with cutting-edge integration of large language models, King&apos;s Crest encourages
-        players to decipher clues and grant meanings by their own design. The choices you make shape
-        how the story ends.
-      </>,
-    ],
-    imageLayoutClass: 'single',
-    images: [
-      {
-        src: '/images/kingsCrest.jpg',
-        placeholder: PLACEHOLDERS.wideAqua,
-        width: 1612,
-        height: 1135,
-        alt: "Concept art of King's Crest",
       },
     ],
   },
