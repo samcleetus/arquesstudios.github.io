@@ -23,7 +23,6 @@ const GAMES = [
     id: 'handborne',
     title: 'Handborne',
     accent: '#d2504c',
-    comingSoon: true,
     platform: 'PC',
     genre: 'Platformer',
     paragraphs: [
