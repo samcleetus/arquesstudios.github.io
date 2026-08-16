@@ -751,6 +751,17 @@
     max-width: min(100%, 460px);
   }
 
+  /* One Second's key art is a wide 16:9 panel, so it hits the 460px width cap
+     long before the shared image height — give it more room and lift it off the
+     card's bottom edge. */
+  .arch-window[data-game='one-second'] .game-images.single img {
+    max-width: min(100%, 540px);
+  }
+
+  .arch-window[data-game='one-second'] .arch-card .game-images {
+    margin-bottom: clamp(0.75rem, 2vw, 1.5rem);
+  }
+
   .game-images.ascata-gallery {
     grid-template-columns: repeat(2, 1fr);
   }

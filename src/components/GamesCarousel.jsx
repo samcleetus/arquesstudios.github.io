@@ -16,9 +16,37 @@ const PLACEHOLDERS = {
     "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='9'%3E%3Crect width='16' height='9' fill='%235dd9cc'/%3E%3C/svg%3E",
   wideSpruce:
     "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='63' height='50'%3E%3Crect width='63' height='50' fill='%231d7a75'/%3E%3C/svg%3E",
+  wideCrimson:
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='9'%3E%3Crect width='16' height='9' fill='%23a83350'/%3E%3C/svg%3E",
 };
 
 const GAMES = [
+  {
+    id: 'one-second',
+    title: 'One Second: Issue #1',
+    accent: '#bf3a5b',
+    comingSoon: true,
+    platform: 'PC & Console',
+    genre: 'Narrative Action',
+    paragraphs: [
+      <>
+        <strong>One second</strong> is all it takes for disaster to strike - and only you are fast
+        enough to stop it. Race through a living 3D comic book, rescuing civilians, outsmarting
+        criminals, and untangling a chain of split-second threats.
+      </>,
+      'Every choice shapes the crisis - and the final comic page that tells your story.',
+    ],
+    imageLayoutClass: 'single',
+    images: [
+      {
+        src: '/images/OneSecond.png',
+        placeholder: PLACEHOLDERS.wideCrimson,
+        width: 3840,
+        height: 2160,
+        alt: 'Title art for One Second: Issue #1',
+      },
+    ],
+  },
   {
     id: 'handborne',
     title: 'Handborne',
