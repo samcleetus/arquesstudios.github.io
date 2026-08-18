@@ -3,22 +3,6 @@ import { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react';
 const TRANSITION_MS = 460;
 const SWIPE_THRESHOLD = 48;
 const CLONE_COUNT = 2;
-const PLACEHOLDERS = {
-  tallDark:
-    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='3' height='5'%3E%3Crect width='3' height='5' fill='%230e1621'/%3E%3C/svg%3E",
-  tallBlue:
-    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='3' height='5'%3E%3Crect width='3' height='5' fill='%230a3c5a'/%3E%3C/svg%3E",
-  wideDark:
-    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='19'%3E%3Crect width='20' height='19' fill='%230e1621'/%3E%3C/svg%3E",
-  wideTeal:
-    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='9'%3E%3Crect width='16' height='9' fill='%2300897b'/%3E%3C/svg%3E",
-  wideAqua:
-    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='9'%3E%3Crect width='16' height='9' fill='%235dd9cc'/%3E%3C/svg%3E",
-  wideSpruce:
-    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='63' height='50'%3E%3Crect width='63' height='50' fill='%231d7a75'/%3E%3C/svg%3E",
-  wideCrimson:
-    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='9'%3E%3Crect width='16' height='9' fill='%23a83350'/%3E%3C/svg%3E",
-};
 
 const GAMES = [
   {
@@ -39,8 +23,7 @@ const GAMES = [
     imageLayoutClass: 'single',
     images: [
       {
-        src: '/images/OneSecond.png',
-        placeholder: PLACEHOLDERS.wideCrimson,
+        src: '/images/OneSecond.webp',
         width: 3840,
         height: 2160,
         alt: 'Title art for One Second: Issue #1',
@@ -64,8 +47,7 @@ const GAMES = [
     imageLayoutClass: 'single',
     images: [
       {
-        src: '/images/Handborne.png',
-        placeholder: PLACEHOLDERS.wideSpruce,
+        src: '/images/Handborne.webp',
         width: 1260,
         height: 1000,
         alt: 'Title art for Handborne',
@@ -90,15 +72,13 @@ const GAMES = [
     imageLayoutClass: 'ascata-gallery',
     images: [
       {
-        src: '/images/game1.jpeg',
-        placeholder: PLACEHOLDERS.tallDark,
+        src: '/images/game1.webp',
         width: 1179,
         height: 2556,
         alt: 'Screenshot of Ascata',
       },
       {
-        src: '/images/game2.jpeg',
-        placeholder: PLACEHOLDERS.tallBlue,
+        src: '/images/game2.webp',
         width: 1179,
         height: 2556,
         alt: 'Another screenshot of Ascata',
@@ -123,8 +103,7 @@ const GAMES = [
     imageLayoutClass: 'single',
     images: [
       {
-        src: '/images/Cent-Isle-1.png',
-        placeholder: PLACEHOLDERS.wideTeal,
+        src: '/images/Cent-Isle-1.webp',
         width: 1170,
         height: 1857,
         alt: 'Concept art for Cent Isle',
@@ -155,8 +134,7 @@ const GAMES = [
     imageLayoutClass: 'single',
     images: [
       {
-        src: '/images/crownlands_img.jpg',
-        placeholder: PLACEHOLDERS.wideDark,
+        src: '/images/crownlands_img.webp',
         width: 2001,
         height: 1927,
         alt: 'Concept art of a procedurally generated Crownlands realm',
@@ -199,15 +177,23 @@ function ArchWindow({ game, isCenter, isClone }) {
         <div className={`game-images ${game.imageLayoutClass}`}>
           {game.images.map((image, index) => (
             <figure key={`${game.id}-image-${index}`}>
+              {/* src is set by React, never imperatively: React re-renders these
+                  nodes on every carousel move, so a src assigned from outside gets
+                  reverted the moment a card shifts.
+
+                  Eager, but at low priority. The off-screen cards sit inside an
+                  overflow:hidden track, so lazy loading would not fetch them until
+                  they slid into view — which is exactly the "art only shows up on
+                  the centre card" problem. All the carousel art together is a few
+                  hundred KB, and low priority keeps it out of the hero's way. */}
               <img
                 className="fortress-frame"
-                data-lazy=""
-                data-src={image.src}
-                src={image.placeholder}
+                src={image.src}
                 width={image.width}
                 height={image.height}
                 alt={image.alt}
                 decoding="async"
+                fetchPriority="low"
               />
             </figure>
           ))}

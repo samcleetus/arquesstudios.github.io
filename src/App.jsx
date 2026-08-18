@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { initNavIndicator } from './modules/navIndicator.js';
 import { initScrollReveal } from './modules/scrollReveal.js';
-import { initLazyMedia } from './modules/lazyMedia.js';
 import { initParallax } from './modules/parallax.js';
 import { initMobileNav } from './modules/mobileNav.js';
 import GamesCarousel from './components/GamesCarousel.jsx';
@@ -71,7 +70,6 @@ function App() {
     const cleanupFns = [
       initNavIndicator(),
       initScrollReveal(),
-      initLazyMedia(),
       initParallax(),
       initMobileNav(),
       initScrollTop(),
@@ -87,12 +85,12 @@ function App() {
       <header className="site-header" data-defense="outer">
         <div className="logo" aria-label="Arques Studios">
           <img
-            src="/images/ArquesStudios.png"
+            src="/images/ArquesStudios.webp"
             width="64"
             height="64"
             alt="Arques Studios Logo"
             decoding="async"
-            loading="lazy"
+            fetchPriority="high"
           />
           <div className="logo-text">
             <h1>Arques Studios</h1>
@@ -168,13 +166,12 @@ function App() {
           <div className="about-img" data-animate="">
             <img
               className="fortress-frame"
-              data-lazy=""
               data-parallax="0.15"
-              data-src="/images/about.jpg"
-              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='3'%3E%3Crect width='2' height='3' fill='%230e1621'/%3E%3C/svg%3E"
+              src="/images/about.webp"
               width="1178"
               height="1972"
               alt="Developer workspace with concept art sketches"
+              loading="lazy"
               decoding="async"
             />
           </div>
@@ -242,7 +239,7 @@ function App() {
           <div className="footer-inner">
             <div className="footer-brand">
               <img
-                src="/images/ArquesStudios.png"
+                src="/images/ArquesStudios.webp"
                 width="36"
                 height="36"
                 alt=""

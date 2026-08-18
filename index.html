@@ -17,7 +17,20 @@
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cinzel+Decorative:wght@700&family=Lora:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet" />
+  <!-- The hero backdrop is a CSS background, so the browser can't discover it until
+       the stylesheet has parsed. Preloading it starts the fetch in the first round trip. -->
+  <link rel="preload" as="image" href="/images/Background.webp" fetchpriority="high" />
+  <!-- Loaded as print, then promoted: the fonts are display=swap anyway, so blocking
+       first paint on a third-party round trip buys nothing. -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cinzel+Decorative:wght@700&family=Lora:ital,wght@0,400;0,500;0,700;1,400&display=swap"
+    rel="stylesheet"
+    media="print"
+    onload="this.media='all'"
+  />
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cinzel+Decorative:wght@700&family=Lora:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet" />
+  </noscript>
   <title>Arques Studios</title>
 </head>
 <body>
